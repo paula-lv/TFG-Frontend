@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -13,6 +14,15 @@ import { CitaListadoComponent } from './shared/cita-listado/cita-listado.compone
 import { CitaDetalleComponent } from './shared/cita-detalle/cita-detalle.component';
 import { ResenaComponent } from './shared/resena/resena.component';
 import { InicioComponent } from './pages/inicio/inicio.component';
+import { HeaderComponent } from './shared/header/header.component';
+import { FooterComponent } from './shared/footer/footer.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import {MatListModule} from '@angular/material/list';
+import { AboutUsComponent } from './pages/about-us/about-us.component';
+import { ContactoComponent } from './pages/contacto/contacto.component';
 
 const routes: Routes = [
   {
@@ -38,7 +48,11 @@ const routes: Routes = [
     CitaListadoComponent,
     CitaDetalleComponent,
     ResenaComponent,
-    InicioComponent
+    InicioComponent,
+    HeaderComponent,
+    FooterComponent,
+    AboutUsComponent,
+    ContactoComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +60,13 @@ const routes: Routes = [
     RouterModule.forRoot([
       {path: 'usuario-perfil', component: PerfilUsuarioComponent},
       {path: 'usuario-calendario', component: CalendarioUsuarioComponent},
-    ])
+    ]),
+    MatSidenavModule,
+    MatToolbarModule,
+    MatIconModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

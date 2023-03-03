@@ -1,1 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+:root {
+    --verde: #51D5B8;
+    --rosa: #eb8eb6;
+    --lila: #8d7cdf;
+    --rojo: #fc615f;
+    --amarillo: #ffc863;
+}
