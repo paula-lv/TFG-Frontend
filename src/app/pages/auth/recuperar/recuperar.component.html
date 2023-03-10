@@ -1,1 +1,15 @@
-<p>recuperar works!</p>
+<section>
+    <div class="login">
+        <form (ngSubmit)="onSubmit()" [formGroup]="recoveryForm" class="custom-form">
+            <img src="assets/images/logo1.png" alt="Logo freeme" width="300" height="100">
+            <input type="email" class="form-control" formControlName="email" placeholder="Email" [ngClass]="{ 'is-invalid': form.email.errors }" />
+            <div *ngIf="form.email.errors && form.email.touched" class="invalid-feedback">
+                <div *ngIf="form.email.errors.required">El email es obligatorio</div>
+                <div *ngIf="form.email.errors.email">El email debe ser válido</div>
+            </div>
+            <div class="centrar">
+                <button type="submit" [disabled]="recoveryForm.invalid" (click)="onSubmit()">Enviar</button>
+            </div>
+        </form>
+      </div>
+</section>

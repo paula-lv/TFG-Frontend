@@ -20,9 +20,13 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import {MatListModule} from '@angular/material/list';
+import { MatListModule } from '@angular/material/list';
 import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { ContactoComponent } from './pages/contacto/contacto.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoginComponent } from './pages/auth/login/login.component';
+import { RegistroComponent } from './pages/auth/registro/registro.component';
+import { RecuperarComponent } from './pages/auth/recuperar/recuperar.component';
 
 const routes: Routes = [
   {
@@ -52,7 +56,10 @@ const routes: Routes = [
     HeaderComponent,
     FooterComponent,
     AboutUsComponent,
-    ContactoComponent
+    ContactoComponent,
+    LoginComponent,
+    RegistroComponent,
+    RecuperarComponent
   ],
   imports: [
     BrowserModule,
@@ -66,7 +73,9 @@ const routes: Routes = [
     MatIconModule,
     BrowserAnimationsModule,
     MatButtonModule,
-    MatListModule
+    MatListModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

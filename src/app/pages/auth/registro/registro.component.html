@@ -1,1 +1,28 @@
-<p>registro works!</p>
+<section>
+    <div class="login">
+        <form (ngSubmit)="onSubmit()" [formGroup]="registerForm" class="custom-form" method="post">
+            <img src="assets/images/logo1.png" alt="Logo freeme" width="300" height="100">
+            <input type="text" id="name" class="form-control" formControlName="name" placeholder="Nombre" [ngClass]="{ 'is-invalid': form.name.errors }" />
+            <div *ngIf="form.name.errors && form.name.touched" class="invalid-feedback">
+                <div *ngIf="form.name.errors.required">El nombre es obligatorio</div>
+            </div>
+            <input type="email" class="form-control" formControlName="email" placeholder="Email" [ngClass]="{ 'is-invalid': form.email.errors }" />
+            <div *ngIf="form.email.errors && form.email.touched" class="invalid-feedback">
+                <div *ngIf="form.email.errors.required">El email es obligatorio</div>
+                <div *ngIf="form.email.errors.email">El email debe ser válido</div>
+            </div>
+            <input type="password" class="form-control" formControlName="psw" placeholder="Contraseña" [ngClass]="{ 'is-invalid': form.psw.errors }" />
+            <div *ngIf="form.psw.errors && form.psw.touched" class="invalid-feedback">
+                <div *ngIf="form.psw.errors.required">La contraseña es obligatoria</div>
+                <div *ngIf="form.psw.errors.minLength">La contraseña debe tener al menos 6 caracteres</div>
+            </div>
+            <input type="password" class="form-control" formControlName="rpsw" placeholder="Contraseña" [ngClass]="{ 'is-invalid': form.rpsw.errors }" />
+            <div *ngIf="form.rpsw.errors && form.rpsw.touched" class="invalid-feedback">
+                <div *ngIf="form.rpsw.errors.required">La contraseña es obligatoria</div>
+            </div>
+            <div class="centrar">
+                <button type="submit" [disabled]="registerForm.invalid" (click)="onSubmit()">Registrarse</button>
+            </div>
+        </form>
+      </div>
+</section>
