@@ -1,12 +1,58 @@
+mat-toolbar {
+    background-color: var(--verde);
+}
+
 mat-sidenav-container {
-    height: calc(205vh - 115vh);
+    height: 85vh;
+    display: block;
+    background-color: white;
+    color: rgba(0, 0, 0, 0);
+    
 }
 
 mat-sidenav {
-    width: 200px;
-    background-color: var(--verde);
+    width: 15vh;
+    height: 85vh;
+    background-color: white;
+    -webkit-box-shadow: 2px 0px 12px 0px rgba(0,0,0,0.62);
+    -moz-box-shadow: 2px 0px 12px 0px rgba(0,0,0,0.62);
+    box-shadow: 2px 0px 12px 0px rgba(0,0,0,0.62);
+}
+
+mat-sidenav-content {
+    height: 85vh;
 }
 
 a {
     text-decoration: none;
+}
+
+.mat-drawer-backdrop.mat-drawer-shown {
+    background-color: rgba(0, 0, 0, 0) !important;
+}
+
+.mat-drawer-container {
+    position: unset !important;
+}
+
+.mat-drawer-inner-container {
+    margin-top: 15vh;
+}
+
+.derecha {
+    float: right;
+}
+
+mat-icon {
+    margin-right: 10px;
+}
+
+.mat-toolbar-row {
+    justify-content: space-between;
+}
+
+button {
+    font-family: 'Nunito', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
 }
