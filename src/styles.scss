@@ -30,3 +30,10 @@ body {
     align-self: auto;
     display: block;
   }
+
+  .enlace {
+    text-transform: uppercase;
+    font-weight: bold;
+    color: var(--verde);
+    cursor: pointer;
+  }

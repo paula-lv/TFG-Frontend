@@ -1,6 +1,6 @@
 <section>
     <div class="login">
-        <form (ngSubmit)="onSubmit()" [formGroup]="loginForm" class="custom-form">
+        <form [formGroup]="loginForm" class="custom-form">
             <img src="assets/images/logo1.png" alt="Logo freeme" width="300" height="100">
             <input type="email" class="form-control" formControlName="email" placeholder="Email" [ngClass]="{ 'is-invalid': form.email.errors }" />
             <div *ngIf="form.email.errors && form.email.touched" class="invalid-feedback">
@@ -12,9 +12,10 @@
                 <div *ngIf="form.psw.errors.required">La contraseña es obligatoria</div>
                 <div *ngIf="form.psw.errors.minLength">La contraseña debe tener al menos 6 caracteres</div>
             </div>
-            <div class="centrar">
+            <div class="centrar" style="margin-top: 2em;">
                 <button type="submit" [disabled]="loginForm.invalid" (click)="onSubmit()">Iniciar sesión</button>
             </div>
+            <p style="margin-top: 1em;">¿No tienes una cuenta? <span class="enlace" routerLink="/registro">Regístrate</span></p>
         </form>
       </div>
 </section>

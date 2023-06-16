@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {  FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import {md5} from '../../../shared/scripts/md5';
+import { AuthService } from 'src/app/services/auth.service';
+import { UserI } from 'src/app/models/user';
 
 @Component({
   selector: 'app-registro',
@@ -12,8 +13,9 @@ export class RegistroComponent implements OnInit {
 
   registerForm: FormGroup = new FormGroup('');
   submitted = false;
+  usuario = true;
 
-  constructor(private router: Router, private fb: FormBuilder) { }
+  constructor(private router: Router, private fb: FormBuilder, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.registerForm = this.fb.group({
@@ -32,18 +34,16 @@ export class RegistroComponent implements OnInit {
     return this.registerForm.controls;
   }
 
-  onSubmit() {
-    this.submitted = true;
+  onSubmit(): void {
+    this.submitted = true; 
 
     if(this.registerForm.invalid) {
       return;
     }
 
-    //encriptar md5
-    let e = md5('holi');
-    console.log(e)
-
-    this.router.navigateByUrl('/');
+    this.authService.register(this.registerForm.getRawValue()).subscribe(res => {
+      this.router.navigateByUrl('/');
+    })
   }
 
   MustMatch(controlName: string, matchingControlName: string) { 
@@ -64,6 +64,14 @@ export class RegistroComponent implements OnInit {
       }
       
     };
+  }
+
+  cargarFormulario(i: number) {
+    if(i == 1) {
+      this.usuario = false;
+    } else {
+      this.usuario = true;
+    }
   }
 
 }

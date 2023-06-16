@@ -7,7 +7,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { EmpresaComponent } from './pages/empresa/empresa.component';
 import { UsuarioComponent } from './pages/usuario/usuario.component';
-import { AuthComponent } from './pages/auth/auth.component';
 import { PerfilUsuarioComponent } from './pages/usuario/perfil-usuario/perfil-usuario.component';
 import { CalendarioUsuarioComponent } from './pages/usuario/calendario-usuario/calendario-usuario.component';
 import { CitaListadoComponent } from './shared/cita-listado/cita-listado.component';
@@ -27,6 +26,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './pages/auth/login/login.component';
 import { RegistroComponent } from './pages/auth/registro/registro.component';
 import { RecuperarComponent } from './pages/auth/recuperar/recuperar.component';
+import { AuthService } from './services/auth.service';
+import { EmpresaService } from './services/empresa.service';
+import { HttpClient, HttpClientModule, HttpHandler } from '@angular/common/http';
+import { MatCardModule } from '@angular/material/card';
 
 const routes: Routes = [
   {
@@ -48,7 +51,6 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    AuthComponent,
     CitaListadoComponent,
     CitaDetalleComponent,
     ResenaComponent,
@@ -75,9 +77,11 @@ const routes: Routes = [
     MatButtonModule,
     MatListModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
+    MatCardModule
   ],
-  providers: [],
+  providers: [AuthService, EmpresaService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
