@@ -17,6 +17,7 @@ export class AppComponent {
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {
           this.ruta = event.url;
+          this.header = false;
           if(this.ruta != '/login' && this.ruta != '/registro' && this.ruta != '/recuperar') {
             this.header = true;
           }

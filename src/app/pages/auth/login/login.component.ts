@@ -33,11 +33,7 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    console.log(this.form)
-
-    this.authService.login(this.loginForm.getRawValue()).subscribe(res => {
-      this.router.navigateByUrl('/');
-    })
+    this.authService.login(this.loginForm.getRawValue()).subscribe();
   } 
 
 }

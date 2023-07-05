@@ -8,17 +8,13 @@ import { OferasPromocionesComponent } from './oferas-promociones/oferas-promocio
 import { EventosComponent } from './eventos/eventos.component';
 import { HistorialClientesComponent } from './historial-clientes/historial-clientes.component';
 import { CalendarioEmpresaComponent } from './calendario-empresa/calendario-empresa.component';
-import { PerfilEmpresaComponent } from './perfil-empresa/perfil-empresa.component';
+import { BrowserModule } from '@angular/platform-browser';
 
 const routes: Routes = [
   {
     path: '',
     component: EmpresaComponent,
     children: [
-      {
-        path: 'perfil',
-        component: PerfilEmpresaComponent,
-      },
       {
         path: 'calendario',
         component: CalendarioEmpresaComponent,
@@ -30,7 +26,6 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     CalendarioEmpresaComponent,
-    PerfilEmpresaComponent,
     EmpresaComponent,
     EmpleadosComponent,
     PerfilEmpleadoComponent,
@@ -40,10 +35,9 @@ const routes: Routes = [
     HistorialClientesComponent
   ],
   imports: [
-    CommonModule,
+    BrowserModule, CommonModule,
     RouterModule.forRoot([
       {path: 'empresa', component: EmpresaComponent},
-      {path: 'empresa-perfil', component: PerfilEmpresaComponent},
       {path: 'empresa-calendario', component: CalendarioEmpresaComponent},
     ]),
   ]

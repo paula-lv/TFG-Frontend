@@ -2,9 +2,11 @@
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 :root {
     --verde: #51D5B8;
+    --verde2: #44b39a;
     --rosa: #eb8eb6;
     --lila: #8d7cdf;
     --rojo: #fc615f;
+    --rojo2: #c04947;
     --amarillo: #ffc863;
 }
 
@@ -37,3 +39,39 @@ body {
     color: var(--verde);
     cursor: pointer;
   }
+
+  .btn-primario {
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    border: none;
+    font-size: 0.875rem;
+    color: #ffffff;
+    font-weight: bold;
+    background-color: var(--verde);
+    display: block;
+    padding: 0.575rem 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+.btn-primario:hover {
+    background-color: var(--verde2);
+}
+
+.btn-secundario {
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  border: none;
+  font-size: 0.875rem;
+  color: #ffffff;
+  font-weight: bold;
+  background-color: var(--rojo);
+  display: block;
+  padding: 0.575rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.btn-secundario:hover {
+  background-color: var(--rojo2);
+}

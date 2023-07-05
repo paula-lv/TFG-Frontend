@@ -2,7 +2,8 @@
     <div class="contenedor">
         <mat-card class="tarjeta container" *ngFor="let empresa of empresas; index as i;">
             <mat-card-header *ngIf="empresas.length != 0">
-                <div class="col-1"><img src="{{empresa.logo}}" class="circular"></div>
+                <div class="col-1" *ngIf="empresa.logo != ''"><img src="{{empresa.logo}}" class="circular"></div>
+                <div class="col-1" *ngIf="empresa.logo == ''"><img src="../../../assets/images/sin-foto.jpg" class="circular"></div>
                 <div class="col-11">
                     <mat-card-title>{{empresa.nombre}}</mat-card-title>
                     <mat-card-subtitle>{{empresa.descripcion}}</mat-card-subtitle>

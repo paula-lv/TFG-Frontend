@@ -1,10 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PerfilUsuarioComponent } from './perfil-usuario/perfil-usuario/perfil-usuario.component';
-import { CalendarioUsuarioComponent } from './calendario-usuario/calendario-usuario/calendario-usuario.component';
+import { PerfilUsuarioComponent } from './perfil-usuario/perfil-usuario.component';
+import { CalendarioUsuarioComponent } from './calendario-usuario/calendario-usuario.component';
 import { UsuarioComponent } from './usuario.component';
 import { Routes, RouterModule } from '@angular/router';
-import { CitasComponent } from './citas/citas.component';
 import { ListadoCitasComponent } from './listado-citas/listado-citas.component';
 
 const routes: Routes = [
@@ -30,7 +29,6 @@ const routes: Routes = [
     CalendarioUsuarioComponent,
     PerfilUsuarioComponent,
     UsuarioComponent,
-    CitasComponent,
     ListadoCitasComponent,
   ],
   imports: [

@@ -5,10 +5,18 @@
             <button [class.inactivo] = "usuario === true" (click)="cargarFormulario(1)" class="col-6" style="border-top-right-radius: 1em;">Empresa</button>
         </div>
         
-        <form (ngSubmit)="onSubmit()" [formGroup]="registerForm" class="custom-form" method="post">
+        <form [formGroup]="registerForm" class="custom-form" method="post">
             <input type="text" id="name" class="form-control" formControlName="name" placeholder="Nombre" [ngClass]="{ 'is-invalid': form.name.errors }" />
             <div *ngIf="form.name.errors && form.name.touched" class="invalid-feedback">
                 <div *ngIf="form.name.errors.required">El nombre es obligatorio</div>
+            </div>
+            <input *ngIf="!this.usuario" type="text" class="form-control" formControlName="cif" placeholder="CIF Empresa" [ngClass]="{ 'is-invalid': form.cif.errors }" />
+            <div *ngIf="form.cif.errors && form.cif.touched" class="invalid-feedback">
+                <div *ngIf="form.cif.errors.minLength">El CIF debe tener 9 dígitos</div>
+            </div>
+            <input type="number" class="form-control" formControlName="tlf" placeholder="Teléfono" [ngClass]="{ 'is-invalid': form.tlf.errors }" />
+            <div *ngIf="form.tlf.errors && form.tlf.touched" class="invalid-feedback">
+                <div *ngIf="form.tlf.errors.minLength">El teléfono debe ser válido</div>
             </div>
             <input type="email" class="form-control" formControlName="email" placeholder="Email" [ngClass]="{ 'is-invalid': form.email.errors }" />
             <div *ngIf="form.email.errors && form.email.touched" class="invalid-feedback">
@@ -24,6 +32,12 @@
             <div *ngIf="form.rpsw.errors && form.rpsw.touched" class="invalid-feedback">
                 <div *ngIf="form.rpsw.errors.required">La contraseña es obligatoria</div>
             </div>
+            <mat-select name="provincia" placeholder="Provincia" [(ngModel)]="provSelect" [ngModelOptions]="{standalone: true}" (selectionChange)="selectProvincia()">
+                <mat-option [value]="item" *ngFor="let item of provincias">{{item.label}}</mat-option>
+            </mat-select>
+            <mat-select name="ciudad" placeholder="Población" [(ngModel)]="poblSelect" [ngModelOptions]="{standalone: true}" (selectionChange)="selectCiudad()">
+                <mat-option [value]="item" *ngFor="let item of poblaciones">{{item.label}}</mat-option>
+            </mat-select>
             <div class="centrar">
                 <button type="submit" [disabled]="registerForm.invalid" (click)="onSubmit()">Registrarse</button>
             </div>

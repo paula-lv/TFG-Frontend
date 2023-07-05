@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Injectable, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Routes, RouterModule } from '@angular/router';
@@ -9,6 +9,7 @@ import { EmpresaComponent } from './pages/empresa/empresa.component';
 import { UsuarioComponent } from './pages/usuario/usuario.component';
 import { PerfilUsuarioComponent } from './pages/usuario/perfil-usuario/perfil-usuario.component';
 import { CalendarioUsuarioComponent } from './pages/usuario/calendario-usuario/calendario-usuario.component';
+import { PerfilEmpresaComponent } from './pages/empresa/perfil-empresa/perfil-empresa.component';
 import { CitaListadoComponent } from './shared/cita-listado/cita-listado.component';
 import { CitaDetalleComponent } from './shared/cita-detalle/cita-detalle.component';
 import { ResenaComponent } from './shared/resena/resena.component';
@@ -28,8 +29,14 @@ import { RegistroComponent } from './pages/auth/registro/registro.component';
 import { RecuperarComponent } from './pages/auth/recuperar/recuperar.component';
 import { AuthService } from './services/auth.service';
 import { EmpresaService } from './services/empresa.service';
-import { HttpClient, HttpClientModule, HttpHandler } from '@angular/common/http';
+import { EmpleadoService } from './services/empleado.service';
+import { ServicioService } from './services/servicio.service';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { MatCardModule } from '@angular/material/card';
+import {MatSelectModule} from '@angular/material/select';
+import { Observable } from 'rxjs';
+import { CookieService } from 'ngx-cookie-service';
+import { ColorPickerModule } from 'ngx-color-picker';
 
 const routes: Routes = [
   {
@@ -48,6 +55,19 @@ const routes: Routes = [
   },
 ];
 
+@Injectable()
+export class CustomInterceptor implements HttpInterceptor { 
+    
+    intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    
+        request = request.clone({
+            withCredentials: true
+        });
+    
+        return next.handle(request);
+    }
+}
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -61,10 +81,11 @@ const routes: Routes = [
     ContactoComponent,
     LoginComponent,
     RegistroComponent,
-    RecuperarComponent
+    RecuperarComponent,
+    PerfilEmpresaComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule, ColorPickerModule,
     AppRoutingModule,
     RouterModule.forRoot([
       {path: 'usuario-perfil', component: PerfilUsuarioComponent},
@@ -79,9 +100,15 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MatCardModule
+    MatCardModule,
+    MatSelectModule
   ],
-  providers: [AuthService, EmpresaService],
+  providers: [AuthService, EmpresaService, CookieService, EmpleadoService, ServicioService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: CustomInterceptor ,
+      multi: true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

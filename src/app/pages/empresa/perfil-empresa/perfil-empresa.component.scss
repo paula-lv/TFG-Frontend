@@ -1,0 +1,82 @@
+section {
+    margin: 20px;
+}
+
+#banner {
+    height: 170px;
+    background-color: var(--verde);
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#servicios {
+    background-color: rgb(202, 202, 202);
+    height: 100px;
+    margin-top: 30px;
+}
+
+h1 {
+    padding-top: 50px;
+}
+
+.circular {
+    width:160px;
+    height:160px;
+    border-radius:80px;
+    border: 3px solid white;
+    margin-top: -70px;
+    margin-left: 50px;
+
+}
+
+.col-md-6 {
+    //height: 400px;
+    margin-bottom: 25px;
+}
+
+#cajitas {
+    margin-top: 40px;
+    margin: 40px 13px;
+}
+
+.titulo {
+    //font-family: 'Varela', sans-serif;
+    font-size: 26px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.texto {
+    //font-family: 'Nunito', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+}
+.bordesito {
+
+    height: 100%;
+    padding: 15px;
+}
+
+.rosa {
+    background-color: rgb(235, 142, 182, 0.4);
+    margin-left: -10px;
+}
+.lila {
+    background-color: rgb(141, 124, 223, 0.4);
+    margin-right: -10px;
+}
+.rojo {
+    background-color: rgb(252, 97, 95, 0.4);
+    margin-left: -10px;
+}
+.amarillo {
+    background-color: rgb(255, 200, 99, 0.4);
+    margin-right: -10px;
+}
+
+.mat-fab {
+    background-color: var(--verde);
+}

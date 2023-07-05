@@ -1,1 +1,111 @@
-<p>perfil-empresa works!</p>
+
+<section>
+    <div id="banner">
+        <h1>{{ empresa.nombre }}</h1>
+        <div class="col-1" *ngIf="empresa.logo != ''"><img src="{{ empresa.logo }}" class="circular"></div>
+        <div class="col-1" *ngIf="empresa.logo == ''"><img src="../../../assets/images/sin-foto.jpg" class="circular"></div>
+    </div>
+    <div id="cajitas">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="bordesito rosa">
+                    <p class="titulo">Descripción</p>
+                    <p class="texto"> {{empresa.descripcion}} </p>
+                </div>
+            </div>
+          <div class="col-md-6">
+            <div class="bordesito amarillo">
+                <p class="titulo">Servicios</p>
+                <div *ngFor="let servicio of servicios">
+                  {{ servicio.nombre }}
+                </div>
+                <button mat-fab data-bs-toggle="modal" data-bs-target="#modal1"><mat-icon>add</mat-icon></button>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="bordesito rojo">
+                <p class="titulo">Empleados</p> 
+                <div *ngFor="let empleado of empleados">
+                  {{ empleado.nombre }}
+                </div>
+                <button mat-fab data-bs-toggle="modal" data-bs-target="#modal2"><mat-icon>add</mat-icon></button>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="bordesito lila">
+                <p class="titulo">Reseñas</p> 
+            </div>
+          </div>
+        </div>
+      </div>
+</section>
+
+<!-- Modal añadir servicio -->
+<div class="modal fade" id="modal1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exModalLabel">Añadir servicio</h5>
+        <button type="button" class="btn-close" name="button" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <form>
+            <div class="row mb-3">
+              <label for="nombre" class="col-3 col-form-label">Servicio</label>
+              <div class="col-9">
+                <input type="text" class="form-control" id="nombre">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="color" class="col-3 col-form-label">Color</label>
+              <div class="col-9">
+                <input class="form-control" [(colorPicker)]="color" [style.background]="color" [cpOutputFormat]="'hex'" readonly style="cursor: pointer;"/>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn-primario" name="button" (click)="crearServicio()">Confirmar</button>
+        <button type="button" class="btn-secundario" name="button" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal añadir empleado -->
+<div class="modal fade" id="modal2">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exModalLabel">Añadir empleado</h5>
+        <button type="button" class="btn-close" name="button" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <form>
+            <div class="row mb-3">
+              <label for="nombre2" class="col-3 col-form-label">Nombre</label>
+              <div class="col-9">
+                <input type="text" class="form-control" id="nombre2">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="color" class="col-3 col-form-label">Color</label>
+              <div class="col-9">
+                <input class="form-control" [(colorPicker)]="color2" [style.background]="color2" [cpOutputFormat]="'hex'" readonly style="cursor: pointer;"/>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn-primario" name="button" (click)="crearEmpleado()">Confirmar</button>
+        <button type="button" class="btn-secundario" name="button" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>

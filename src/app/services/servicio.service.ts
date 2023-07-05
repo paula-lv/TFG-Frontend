@@ -4,17 +4,18 @@ import { Observable, tap } from "rxjs";
 import { AuthService } from "./auth.service";
 
 @Injectable()
-export class EmpresaService {
-    url: string = 'http://localhost:3000/api/empresa';
+export class ServicioService {
+    url: string = 'http://localhost:3000/api/servicio';
 
     constructor(private httpClient: HttpClient, private authService: AuthService) { }
 
-    getEmpresas(): Observable<any> {
-        return this.httpClient.get(this.url)
+    getServicios(email: any): Observable<any> {
+        return this.httpClient.get(this.url, {params: { email : email } });
     }
 
-    getEmpresa(email: any): Observable<any> {
-        return this.httpClient.post(this.url+'/obtener', { email: email }).pipe(tap(
+    postServicio(newServicio: any): Observable<any> {
+        debugger
+        return this.httpClient.post(this.url, newServicio).pipe(tap(
             (res) => {
                 if(res){
                     console.log(res);
@@ -22,7 +23,6 @@ export class EmpresaService {
             }
         ))
 
-        
     }
 
 }
