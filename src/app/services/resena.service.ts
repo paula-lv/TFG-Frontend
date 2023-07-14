@@ -9,8 +9,8 @@ export class ResenaService {
 
     constructor(private httpClient: HttpClient, private authService: AuthService) { }
 
-    getResenas(nombre: any): Observable<any> {
-        return this.httpClient.get(this.url, {params: { nombre : nombre } });
+    getResenas(cif: any): Observable<any> {
+        return this.httpClient.get(this.url, {params: { cif : cif } });
     }
 
     postResena(newResena: any): Observable<any> {

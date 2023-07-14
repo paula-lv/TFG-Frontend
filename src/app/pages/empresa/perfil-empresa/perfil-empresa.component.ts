@@ -3,6 +3,7 @@ import { EmpresaService } from 'src/app/services/empresa.service';
 import { ServicioService } from 'src/app/services/servicio.service';
 import { EmpleadoService } from 'src/app/services/empleado.service';
 import { ResenaService } from 'src/app/services/resena.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-perfil-empresa',
@@ -15,15 +16,18 @@ export class PerfilEmpresaComponent implements OnInit {
   empleados: any = '';
   servicios: any = '';
   resenas: any = '';
+  usuarios: any = '';
   color: any = '#2883e9';
   color2: any = '#2883e9';
 
-  constructor(private empresaService: EmpresaService, private servicioService: ServicioService, private empleadoService: EmpleadoService, private resenaService: ResenaService) { }
+  constructor(private empresaService: EmpresaService, private servicioService: ServicioService, private empleadoService: EmpleadoService, 
+    private resenaService: ResenaService, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.obtenerEmpresa();
     this.obtenerEmpleados();
     this.obtenerServicios();
+    this.obtenerResenas();
   }
 
   obtenerEmpresa() {
@@ -61,15 +65,15 @@ export class PerfilEmpresaComponent implements OnInit {
 
   obtenerResenas() {
     let empresa = '';
-
     if(JSON.parse(localStorage.getItem('usuario')!).tipo == 1)
-      empresa = JSON.parse(localStorage.getItem('usuario')!).nombre;
+      empresa = JSON.parse(localStorage.getItem('usuario')!).cif;
     else {
       empresa = '';
     }
 
     this.resenaService.getResenas(empresa).subscribe(data => {
-      this.resenas = data;
+      this.resenas = data[0];
+      this.usuarios = data[1]
       console.log(this.resenas)
     }, error => {
       console.log(error);

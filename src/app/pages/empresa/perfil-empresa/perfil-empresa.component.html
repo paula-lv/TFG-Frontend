@@ -1,45 +1,71 @@
 
-<section>
+<section style="min-height: 77%;">
     <div id="banner">
         <h1>{{ empresa.nombre }}</h1>
         <div class="col-1" *ngIf="empresa.logo != ''"><img src="{{ empresa.logo }}" class="circular"></div>
         <div class="col-1" *ngIf="empresa.logo == ''"><img src="../../../assets/images/sin-foto.jpg" class="circular"></div>
+        
     </div>
     <div id="cajitas">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="bordesito rosa">
-                    <p class="titulo">Descripción</p>
-                    <p class="texto"> {{empresa.descripcion}} </p>
+      <div class="row">
+        <div class="col-md-8">
+            <div class="bordesito">
+                <p class="titulo">Reseñas</p>
+                <mat-divider></mat-divider>
+                <div class="tarjeta col" *ngFor="let resena of resenas; let i = index" style="margin-top: 30px;">
+                  <div class="globo row">
+                    {{resena.mensaje}}
+                  </div>
+                  <div class="usuVal row" *ngIf="resena"> 
+                    <div class="col-6 usuario"> {{usuarios[i]}} </div>
+                    
+                    <div class="col-6 estrellas" *ngIf="resena.estrellas == 1">
+                      <mat-icon>grade</mat-icon> 
+                    </div>
+                    <div class="col-6 estrellas" *ngIf="resena.estrellas == 2">
+                      <mat-icon>grade</mat-icon>
+                      <mat-icon>grade</mat-icon> 
+                    </div>
+                    <div class="col-6 estrellas" *ngIf="resena.estrellas == 3">
+                      <mat-icon>grade</mat-icon>
+                      <mat-icon>grade</mat-icon>
+                      <mat-icon>grade</mat-icon> 
+                    </div>
+                    <div class="col-6 estrellas" *ngIf="resena.estrellas == 4">
+                      <mat-icon>grade</mat-icon>
+                      <mat-icon>grade</mat-icon>
+                      <mat-icon>grade</mat-icon> 
+                      <mat-icon>grade</mat-icon> 
+                    </div>
+                    <div class="col-6 estrellas" *ngIf="resena.estrellas == 5">
+                      <mat-icon>grade</mat-icon>
+                      <mat-icon>grade</mat-icon> 
+                      <mat-icon>grade</mat-icon>
+                      <mat-icon>grade</mat-icon> 
+                      <mat-icon>grade</mat-icon>
+                    </div>
+                  </div>
                 </div>
             </div>
-          <div class="col-md-6">
-            <div class="bordesito amarillo">
-                <p class="titulo">Servicios</p>
-                <div *ngFor="let servicio of servicios">
-                  {{ servicio.nombre }}
-                </div>
-                <button mat-fab data-bs-toggle="modal" data-bs-target="#modal1"><mat-icon>add</mat-icon></button>
-            </div>
-          </div>
         </div>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="bordesito rojo">
-                <p class="titulo">Empleados</p> 
-                <div *ngFor="let empleado of empleados">
-                  {{ empleado.nombre }}
+
+        <div class="col-md-4">
+          <div class="bordesito">
+              <p class="titulo">Servicios</p>
+              <mat-divider></mat-divider>
+              <div class="servicios">
+                <div class="row filaServicio" *ngFor="let servicio of servicios; let i = index">
+                  <div class="col-8 servicio row">
+                    <div class="col-8">{{servicio.nombre}}</div>
+                    <div class="col-4 precio">{{servicio.precio}} €</div>
+                  </div>
+                  <div class="col-4 boton"><button mat-flat-button class="btn-primario">Reservar</button></div>
                 </div>
-                <button mat-fab data-bs-toggle="modal" data-bs-target="#modal2"><mat-icon>add</mat-icon></button>
-            </div>
+              </div>
           </div>
-          <div class="col-md-6">
-            <div class="bordesito lila">
-                <p class="titulo">Reseñas</p> 
-            </div>
-          </div>
-        </div>
       </div>
+      </div>
+    </div>
 </section>
 
 <!-- Modal añadir servicio -->

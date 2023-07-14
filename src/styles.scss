@@ -10,6 +10,12 @@
     --amarillo: #ffc863;
 }
 
+.fc .fc-toolbar-title {
+  font-family: "Nunito", sans-serif !important;
+  font-size: 28px !important;
+  font-weight: 600 !important;
+}
+
 html, body {
     min-height: 100vh;
     height: auto;
@@ -24,6 +30,7 @@ body {
     align-content: stretch;
     align-items: stretch;
     height: 100vh;
+    background-color: #f1f1f1 !important;
   }
    
   app-root {

@@ -9,6 +9,7 @@ import { EventosComponent } from './eventos/eventos.component';
 import { HistorialClientesComponent } from './historial-clientes/historial-clientes.component';
 import { CalendarioEmpresaComponent } from './calendario-empresa/calendario-empresa.component';
 import { BrowserModule } from '@angular/platform-browser';
+import { FullCalendarModule } from '@fullcalendar/angular/full-calendar.module';
 
 const routes: Routes = [
   {
@@ -32,10 +33,10 @@ const routes: Routes = [
     ResenaComponent,
     OferasPromocionesComponent,
     EventosComponent,
-    HistorialClientesComponent
+    HistorialClientesComponent,
   ],
   imports: [
-    BrowserModule, CommonModule,
+    BrowserModule, CommonModule, FullCalendarModule,
     RouterModule.forRoot([
       {path: 'empresa', component: EmpresaComponent},
       {path: 'empresa-calendario', component: CalendarioEmpresaComponent},

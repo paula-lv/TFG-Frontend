@@ -37,6 +37,9 @@ import {MatSelectModule} from '@angular/material/select';
 import { Observable } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import { ColorPickerModule } from 'ngx-color-picker';
+import { ResenaService } from './services/resena.service';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { CalendarioEmpresaComponent } from './pages/empresa/calendario-empresa/calendario-empresa.component';
 
 const routes: Routes = [
   {
@@ -82,10 +85,12 @@ export class CustomInterceptor implements HttpInterceptor {
     LoginComponent,
     RegistroComponent,
     RecuperarComponent,
-    PerfilEmpresaComponent
+    PerfilEmpresaComponent,
+    CalendarioEmpresaComponent,
+    CalendarioUsuarioComponent
   ],
   imports: [
-    BrowserModule, ColorPickerModule,
+    BrowserModule, ColorPickerModule, FullCalendarModule,
     AppRoutingModule,
     RouterModule.forRoot([
       {path: 'usuario-perfil', component: PerfilUsuarioComponent},
@@ -103,7 +108,7 @@ export class CustomInterceptor implements HttpInterceptor {
     MatCardModule,
     MatSelectModule
   ],
-  providers: [AuthService, EmpresaService, CookieService, EmpleadoService, ServicioService,
+  providers: [AuthService, EmpresaService, CookieService, EmpleadoService, ServicioService, ResenaService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: CustomInterceptor ,

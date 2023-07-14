@@ -64,7 +64,6 @@ export class RegistroComponent implements OnInit {
     if(this.registerForm.invalid) {
       return;
     }
-
     this.authService.register(this.registerForm.getRawValue()).subscribe(res => {
       environment.tipoUsuario =  this.registerForm.controls['tipo'].value;
       this.router.navigate(['/login']);

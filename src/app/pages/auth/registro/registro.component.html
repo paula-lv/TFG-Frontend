@@ -14,7 +14,7 @@
             <div *ngIf="form.cif.errors && form.cif.touched" class="invalid-feedback">
                 <div *ngIf="form.cif.errors.minLength">El CIF debe tener 9 dígitos</div>
             </div>
-            <input type="number" class="form-control" formControlName="tlf" placeholder="Teléfono" [ngClass]="{ 'is-invalid': form.tlf.errors }" />
+            <input type="text" class="form-control" formControlName="tlf" placeholder="Teléfono" [ngClass]="{ 'is-invalid': form.tlf.errors }" />
             <div *ngIf="form.tlf.errors && form.tlf.touched" class="invalid-feedback">
                 <div *ngIf="form.tlf.errors.minLength">El teléfono debe ser válido</div>
             </div>
