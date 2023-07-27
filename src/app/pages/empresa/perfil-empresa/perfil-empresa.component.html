@@ -1,48 +1,190 @@
 
 <section style="min-height: 77%;">
     <div id="banner">
-        <h1>{{ empresa.nombre }}</h1>
-        <div class="col-1" *ngIf="empresa.logo != ''"><img src="{{ empresa.logo }}" class="circular"></div>
-        <div class="col-1" *ngIf="empresa.logo == ''"><img src="../../../assets/images/sin-foto.jpg" class="circular"></div>
+      <div id="carrusel" class="carousel slide" data-bs-ride="carousel">            
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carrusel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carrusel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carrusel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active" data-bs-interval="10000">
+            <img src="{{empresa.img1}}" class="d-block w-100">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>{{empresa.nombre}}</h5>
+            </div>
+          </div>
+          <div class="carousel-item" data-bs-interval="2000">
+            <img src="{{empresa.img2}}" class="d-block w-100">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>{{empresa.nombre}}</h5>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="{{empresa.img3}}" class="d-block w-100">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>{{empresa.nombre}}</h5>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carrusel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Anterior</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carrusel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Siguiente</span>
+        </button>
+    </div>
         
     </div>
+
     <div id="cajitas">
+      <div class="row" style="padding: 12px; margin-bottom: 10px;">
+        <div class="col-md-12 bordesito row" style="padding: 20px;">
+          <div class="col-12">
+            <h1>{{empresa.nombre}}</h1>
+          </div>
+          <mat-divider style="margin: 10px 0 20px 0;"></mat-divider>
+          <div class="col-12 row">
+            <div class="col-6">
+              Nombre:
+              <input type="text" class="form-control" value="{{empresa.nombre}}">
+            </div>
+            <div class="col-6">
+              Email:
+              <input type="text" class="form-control" value="{{empresa.emailAdmin}}">
+            </div>
+            <div class="col-6" style="margin-top: 10px;">
+              Dirección:
+              <input type="text" class="form-control" value="{{empresa.direccion}}">
+            </div>
+            <div class="col-6" style="margin-top: 10px;">
+              Teléfono:
+              <input type="text" class="form-control" value="687978689">
+            </div>
+            <div class="col-6" style="margin-top: 10px;">
+              Color:
+                <input class="form-control" [(colorPicker)]="color2" [style.background]="color2" [cpOutputFormat]="'hex'" readonly style="cursor: pointer;"/>
+            </div>
+            <div class="col-3" style="margin-top: 10px;">
+              Población:
+              <input type="text" class="form-control" value="Alcocer de Planes">
+            </div>
+            <div class="col-3" style="margin-top: 10px;">
+              Provincia:
+              <input type="text" class="form-control" value="Alicante">
+            </div>
+            <div class="col-3" style="margin-top: 20px;"><button class="btn-primario buttonPersonalizar">Modificar</button></div>
+          </div>
+
+          <!--<div class="col-3">
+            <div class="row mb-3">
+              <label for="color" class="col-3 col-form-label">Color</label>
+              <div class="col-9">
+                <input class="form-control" [(colorPicker)]="color2" [style.background]="color2" [cpOutputFormat]="'hex'" readonly style="cursor: pointer;"/>
+              </div>
+            </div>
+          </div>-->
+          
+         </div>
+      </div>
       <div class="row">
         <div class="col-md-8">
             <div class="bordesito">
-                <p class="titulo">Reseñas</p>
+              <div class="row">
+                <div class="col-9">
+                  <div class="titulo" style="text-align: left; padding: 0 20px;">Últimas reseñas</div> 
+                </div>
+                <div class="col-3">
+                  <button class="btn-primario buttonPersonalizar" style="margin-top: 20px;" routerLink="/opiniones">Ver todas</button>
+                </div>
+              </div>
                 <mat-divider></mat-divider>
-                <div class="tarjeta col" *ngFor="let resena of resenas; let i = index" style="margin-top: 30px;">
-                  <div class="globo row">
-                    {{resena.mensaje}}
+                <br>
+                <div *ngFor="let resena of resenas" class="resenas tarjeta col">
+                  <div class="row">
+                    <div class="col-6 titulo2">
+                      {{ resena.empresa }}
+                    </div>
+                    <div class="col-6 estrellas" *ngIf="resena.valoracion == 1">
+                      <mat-icon class="mat-iconPersonalizar">grade</mat-icon>
+                      <mat-icon class="mat-iconPersonalizar">star_border</mat-icon>
+                      <mat-icon class="mat-iconPersonalizar">star_border</mat-icon>
+                      <mat-icon class="mat-iconPersonalizar">star_border</mat-icon>
+                      <mat-icon class="mat-iconPersonalizar">star_border</mat-icon>
+                    </div>
+                    <div class="col-6 estrellas" *ngIf="resena.valoracion == 2">
+                      <mat-icon class="mat-iconPersonalizar">grade</mat-icon>
+                      <mat-icon class="mat-iconPersonalizar">grade</mat-icon>
+                      <mat-icon class="mat-iconPersonalizar">star_border</mat-icon>
+                      <mat-icon class="mat-iconPersonalizar">star_border</mat-icon>
+                      <mat-icon class="mat-iconPersonalizar">star_border</mat-icon>
+                    </div>
+                    <div class="col-6 estrellas" *ngIf="resena.valoracion == 3">
+                      <mat-icon class="mat-iconPersonalizar">grade</mat-icon>
+                      <mat-icon class="mat-iconPersonalizar">grade</mat-icon>
+                      <mat-icon class="mat-iconPersonalizar">grade</mat-icon>
+                      <mat-icon class="mat-iconPersonalizar">star_border</mat-icon>
+                      <mat-icon class="mat-iconPersonalizar">star_border</mat-icon> 
+                    </div>
+                    <div class="col-6 estrellas" *ngIf="resena.valoracion == 4">
+                      <mat-icon class="mat-iconPersonalizar">grade</mat-icon>
+                      <mat-icon class="mat-iconPersonalizar">grade</mat-icon>
+                      <mat-icon class="mat-iconPersonalizar">grade</mat-icon> 
+                      <mat-icon class="mat-iconPersonalizar">grade</mat-icon> 
+                      <mat-icon class="mat-iconPersonalizar">star_border</mat-icon>
+                    </div>
+                    <div class="col-6 estrellas" *ngIf="resena.valoracion == 5">
+                      <mat-icon class="mat-iconPersonalizar">grade</mat-icon>
+                      <mat-icon class="mat-iconPersonalizar">grade</mat-icon> 
+                      <mat-icon class="mat-iconPersonalizar">grade</mat-icon>
+                      <mat-icon class="mat-iconPersonalizar">grade</mat-icon> 
+                      <mat-icon class="mat-iconPersonalizar">grade</mat-icon>
+                    </div>
                   </div>
-                  <div class="usuVal row" *ngIf="resena"> 
-                    <div class="col-6 usuario"> {{usuarios[i]}} </div>
-                    
-                    <div class="col-6 estrellas" *ngIf="resena.estrellas == 1">
-                      <mat-icon>grade</mat-icon> 
+                  <hr>
+                  <div class="row">
+                      <div class="row mensaje">{{resena.mensaje}}</div>
+                    <p class="fecha2">{{formatearFecha(resena.fecha_desde)}}</p>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-6">
+                      Servicio: <span>{{resena.servicio}}</span>
                     </div>
-                    <div class="col-6 estrellas" *ngIf="resena.estrellas == 2">
-                      <mat-icon>grade</mat-icon>
-                      <mat-icon>grade</mat-icon> 
+                    <div class="col-6 empleado">
+                      Le atendió: <span>{{resena.empleado}}</span>
                     </div>
-                    <div class="col-6 estrellas" *ngIf="resena.estrellas == 3">
-                      <mat-icon>grade</mat-icon>
-                      <mat-icon>grade</mat-icon>
-                      <mat-icon>grade</mat-icon> 
-                    </div>
-                    <div class="col-6 estrellas" *ngIf="resena.estrellas == 4">
-                      <mat-icon>grade</mat-icon>
-                      <mat-icon>grade</mat-icon>
-                      <mat-icon>grade</mat-icon> 
-                      <mat-icon>grade</mat-icon> 
-                    </div>
-                    <div class="col-6 estrellas" *ngIf="resena.estrellas == 5">
-                      <mat-icon>grade</mat-icon>
-                      <mat-icon>grade</mat-icon> 
-                      <mat-icon>grade</mat-icon>
-                      <mat-icon>grade</mat-icon> 
-                      <mat-icon>grade</mat-icon>
+                  </div>
+                  
+                </div>
+            </div>
+
+
+
+
+            <div class="bordesito" style="margin-top: 20px;">
+              <div class="row">
+                  <div class="col-10"><p class="titulo">Servicios</p></div>
+                  <div class="col-2"><mat-icon class="boton mat-iconPersonalizar" style="margin-top: 22px;" data-bs-toggle="modal" data-bs-target="#modal1">add</mat-icon></div>
+                </div>
+                <mat-divider></mat-divider>
+                <div class="row">
+                  <div class="row col-6" *ngFor="let servicio of servicios; let j = index" style="margin: 20px 0;">
+                    <div class="borde" style="padding: 20px;">
+                      <div class="row">
+                        <div class="col-5"  style="font-weight: 600;">Servicio</div>
+                        <div class="col-3"  style="font-weight: 600;">Duración</div>
+                        <div class="col-3"  style="font-weight: 600;">Precio</div>
+                        <div class="col-1"><mat-icon class="boton mat-iconPersonalizar" data-bs-toggle="modal" data-bs-target="#modal" (click)="editarServicio(j)">edit</mat-icon></div>
+                      </div>
+                      <mat-divider style="margin: 20px 0;"></mat-divider>
+                      <div class="row">
+                        <div class="col-5">{{servicio.nombre}}</div>
+                        <div class="col-3">{{servicio.duracion}}</div>
+                        <div class="col-3">{{servicio.precio}}€</div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -50,26 +192,102 @@
         </div>
 
         <div class="col-md-4">
+          <div class="bordesito" style="margin-bottom: 20px;">
+            <div class="row">
+              <div class="col-10"><p class="titulo">Horario</p></div>
+              <div class="col-2"><mat-icon class="boton mat-iconPersonalizar" style="margin-top: 22px;" data-bs-toggle="modal" data-bs-target="#modal4" (click)="editarHorario()">edit</mat-icon></div>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="col-12 row" id="horario" style="margin-top: 10px; padding: 20px; text-align: center;" >
+              {{getHorario()}}
+            </div>
+          </div>
+
           <div class="bordesito">
-              <p class="titulo">Servicios</p>
+            <div class="row">
+              <div class="col-10"><p class="titulo">Empleados</p></div>
+              <div class="col-2"><mat-icon class="boton mat-iconPersonalizar" style="margin-top: 22px;" data-bs-toggle="modal" data-bs-target="#modal2">person_add</mat-icon></div>
+            </div>
               <mat-divider></mat-divider>
-              <div class="servicios">
-                <div class="row filaServicio" *ngFor="let servicio of servicios; let i = index">
-                  <div class="col-8 servicio row">
-                    <div class="col-8">{{servicio.nombre}}</div>
-                    <div class="col-4 precio">{{servicio.precio}} €</div>
+                <div class="empleadoDetalle row">
+                  <div class="col-12 row nombre">
+                    <div class="col-10">{{empleado1.nombre}}</div>
+                    <div class="col-2"><mat-icon class="boton mat-iconPersonalizar" data-bs-toggle="modal" data-bs-target="#modal3" (click)="editarEmpleado(1)">edit</mat-icon></div>
+                    
                   </div>
-                  <div class="col-4 boton"><button mat-flat-button class="btn-primario">Reservar</button></div>
+                  <mat-divider></mat-divider>
+                  <div class="col-12 row" id="horario1" style="margin-top: 10px;">
+                    {{getHorario1()}}
+                  </div>
                 </div>
-              </div>
+
+                <div class="empleadoDetalle row">
+                  <div class="col-12 row nombre">
+                    <div class="col-10">{{empleado2.nombre}}</div>
+                    <div class="col-2"><mat-icon class="boton mat-iconPersonalizar" data-bs-toggle="modal" data-bs-target="#modal3" (click)="editarEmpleado(2)">edit</mat-icon></div>
+                    
+                  </div>
+                  <mat-divider></mat-divider>
+                  <div class="col-12 row" id="horario2" style="margin-top: 10px;">
+                    {{getHorario2()}}
+                  </div>
+                </div>
           </div>
       </div>
       </div>
     </div>
 </section>
 
+<!-- Modal editar servicio -->
+<div class="modal modal-lg fade" id="modal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exModalLabel">Editar servicio</h5>
+        <button type="button" class="btn-close" name="button" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <form>
+            <div class="row mb-3">
+              <label for="nombre" class="col-3 col-form-label" style="padding-right: 0; padding-left: 0;">Nombre</label>
+              <div class="col-9" style="padding-right: 0; padding-left: 0;">
+                <input type="text" class="form-control" id="nombreServicio">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <div class="row mb-3">
+                  <label for="nombre" class="col-3 col-form-label" style="padding-right: 0; padding-left: 0;">Precio</label>
+                  <div class="col-9" style="padding-right: 0; padding-left: 0;">
+                    <input type="text" class="form-control" id="precioServicio">
+                  </div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="row mb-3">
+                  <label for="nombre" class="col-3 col-form-label" style="padding-right: 0; padding-left: 0;">Duración</label>
+                  <div class="col-9" style="padding-right: 0; padding-left: 0;">
+                    <input type="time" class="form-control" id="duracionServicio">
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn-primario" name="button" (click)="crearServicio()">Confirmar</button>
+        <button type="button" class="btn-secundario" name="button" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- Modal añadir servicio -->
-<div class="modal fade" id="modal1">
+<div class="modal modal-lg fade" id="modal1">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
@@ -80,17 +298,30 @@
         <div class="container-fluid">
           <form>
             <div class="row mb-3">
-              <label for="nombre" class="col-3 col-form-label">Servicio</label>
+              <label for="nombre" class="col-3 col-form-label">Nombre</label>
               <div class="col-9">
                 <input type="text" class="form-control" id="nombre">
               </div>
             </div>
-            <div class="row mb-3">
-              <label for="color" class="col-3 col-form-label">Color</label>
-              <div class="col-9">
-                <input class="form-control" [(colorPicker)]="color" [style.background]="color" [cpOutputFormat]="'hex'" readonly style="cursor: pointer;"/>
+            <div class="row">
+              <div class="col-6">
+                <div class="row mb-3">
+                  <label for="nombre" class="col-3 col-form-label" style="padding-right: 0; padding-left: 0;">Precio</label>
+                  <div class="col-9" style="padding-right: 0; padding-left: 0;">
+                    <input type="text" class="form-control" id="nombre">
+                  </div>
+                </div>
               </div>
-            </div>
+              <div class="col-6">
+                <div class="row mb-3" style="padding-right: 0; padding-left: 0;">
+                  <label for="nombre" class="col-3 col-form-label">Duración</label>
+                  <div class="col-9" style="padding-right: 0; padding-left: 0;">
+                    <input type="time" class="form-control" id="nombre">
+                  </div>
+                </div>
+              </div>
+              </div>
+
           </form>
         </div>
       </div>
@@ -103,7 +334,7 @@
 </div>
 
 <!-- Modal añadir empleado -->
-<div class="modal fade" id="modal2">
+<div class="modal modal-xl fade" id="modal2">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
@@ -119,10 +350,223 @@
                 <input type="text" class="form-control" id="nombre2">
               </div>
             </div>
-            <div class="row mb-3">
-              <label for="color" class="col-3 col-form-label">Color</label>
-              <div class="col-9">
-                <input class="form-control" [(colorPicker)]="color2" [style.background]="color2" [cpOutputFormat]="'hex'" readonly style="cursor: pointer;"/>
+            <div class="row mb-3 horario">
+              <label for="nombre2" class="col-3 col-form-label">Horario</label>
+              <div class="row col-12 titulos">
+                <div class="col-1">Día</div>
+                <div class="col-4">Rango 1</div>
+                <div class="col-4">Rango 2</div>
+                <div class="col-3">Libre</div>
+              </div>
+              <mat-divider style="margin: 20px 0;"></mat-divider>
+              <div class="col-12 row">
+                <div class="col-1" style="text-align: center; align-self: center;">Lunes</div>
+                <div class="col-4 row">
+                  <div class="col-6">Desde
+                    <div class="input-group date" id="timepicker">
+                        <input type="time" class="form-control" id="selectHora">
+                    </div></div>
+                  <div class="col-6">Hasta
+                    <div class="input-group date" id="timepicker">
+                      <input type="time" class="form-control" id="selectHora">
+                  </div></div>
+                </div>
+                <div class="col-4 row">
+                  <div class="col-6">Desde
+                    <div class="input-group date" id="timepicker">
+                        <input type="time" class="form-control" id="selectHora">
+                    </div></div>
+                  <div class="col-6">Hasta
+                    <div class="input-group date" id="timepicker">
+                      <input type="time" class="form-control" id="selectHora">
+                  </div></div>
+                </div>
+                <div class="col-3" style="align-self: center;">
+                  <div class="form-check form-switch" style=" margin-left: 85px;">
+                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" style=" width: 60px; height: 20px;">
+                    <label class="form-check-label" for="flexSwitchCheckDefault"></label>
+                  </div>
+                </div>
+              </div>
+              <mat-divider style="margin: 20px 0;"></mat-divider>
+              <div class="col-12 row">
+                <div class="col-1" style="text-align: center; align-self: center;">Martes</div>
+                <div class="col-4 row">
+                  <div class="col-6">Desde
+                    <div class="input-group date" id="timepicker">
+                        <input type="time" class="form-control" id="selectHora">
+                    </div></div>
+                  <div class="col-6">Hasta
+                    <div class="input-group date" id="timepicker">
+                      <input type="time" class="form-control" id="selectHora">
+                  </div></div>
+                </div>
+                <div class="col-4 row">
+                  <div class="col-6">Desde
+                    <div class="input-group date" id="timepicker">
+                        <input type="time" class="form-control" id="selectHora">
+                    </div></div>
+                  <div class="col-6">Hasta
+                    <div class="input-group date" id="timepicker">
+                      <input type="time" class="form-control" id="selectHora">
+                  </div></div>
+                </div>
+                <div class="col-3" style="align-self: center;">
+                  <div class="form-check form-switch" style=" margin-left: 85px;">
+                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" style=" width: 60px; height: 20px;">
+                    <label class="form-check-label" for="flexSwitchCheckDefault"></label>
+                  </div>
+                </div>
+              </div>
+              <mat-divider style="margin: 20px 0;"></mat-divider>
+              <div class="col-12 row">
+                <div class="col-1" style="text-align: center; align-self: center;">Miércoles</div>
+                <div class="col-4 row">
+                  <div class="col-6">Desde
+                    <div class="input-group date" id="timepicker">
+                        <input type="time" class="form-control" id="selectHora">
+                    </div></div>
+                  <div class="col-6">Hasta
+                    <div class="input-group date" id="timepicker">
+                      <input type="time" class="form-control" id="selectHora">
+                  </div></div>
+                </div>
+                <div class="col-4 row">
+                  <div class="col-6">Desde
+                    <div class="input-group date" id="timepicker">
+                        <input type="time" class="form-control" id="selectHora">
+                    </div></div>
+                  <div class="col-6">Hasta
+                    <div class="input-group date" id="timepicker">
+                      <input type="time" class="form-control" id="selectHora">
+                  </div></div>
+                </div>
+                <div class="col-3" style="align-self: center;">
+                  <div class="form-check form-switch" style=" margin-left: 85px;">
+                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" style=" width: 60px; height: 20px;">
+                    <label class="form-check-label" for="flexSwitchCheckDefault"></label>
+                  </div>
+                </div>
+              </div>
+              <mat-divider style="margin: 20px 0;"></mat-divider>
+              <div class="col-12 row">
+                <div class="col-1" style="text-align: center; align-self: center;">Jueves</div>
+                <div class="col-4 row">
+                  <div class="col-6">Desde
+                    <div class="input-group date" id="timepicker">
+                        <input type="time" class="form-control" id="selectHora">
+                    </div></div>
+                  <div class="col-6">Hasta
+                    <div class="input-group date" id="timepicker">
+                      <input type="time" class="form-control" id="selectHora">
+                  </div></div>
+                </div>
+                <div class="col-4 row">
+                  <div class="col-6">Desde
+                    <div class="input-group date" id="timepicker">
+                        <input type="time" class="form-control" id="selectHora">
+                    </div></div>
+                  <div class="col-6">Hasta
+                    <div class="input-group date" id="timepicker">
+                      <input type="time" class="form-control" id="selectHora">
+                  </div></div>
+                </div>
+                <div class="col-3" style="align-self: center;">
+                  <div class="form-check form-switch" style=" margin-left: 85px;">
+                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" style=" width: 60px; height: 20px;">
+                    <label class="form-check-label" for="flexSwitchCheckDefault"></label>
+                  </div>
+                </div>
+              </div>
+              <mat-divider style="margin: 20px 0;"></mat-divider>
+              <div class="col-12 row">
+                <div class="col-1" style="text-align: center; align-self: center;">Viernes</div>
+                <div class="col-4 row">
+                  <div class="col-6">Desde
+                    <div class="input-group date" id="timepicker">
+                        <input type="time" class="form-control" id="selectHora">
+                    </div></div>
+                  <div class="col-6">Hasta
+                    <div class="input-group date" id="timepicker">
+                      <input type="time" class="form-control" id="selectHora">
+                  </div></div>
+                </div>
+                <div class="col-4 row">
+                  <div class="col-6">Desde
+                    <div class="input-group date" id="timepicker">
+                        <input type="time" class="form-control" id="selectHora">
+                    </div></div>
+                  <div class="col-6">Hasta
+                    <div class="input-group date" id="timepicker">
+                      <input type="time" class="form-control" id="selectHora">
+                  </div></div>
+                </div>
+                <div class="col-3" style="align-self: center;">
+                  <div class="form-check form-switch" style=" margin-left: 85px;">
+                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" style=" width: 60px; height: 20px;">
+                    <label class="form-check-label" for="flexSwitchCheckDefault"></label>
+                  </div>
+                </div>
+              </div>
+              <mat-divider style="margin: 20px 0;"></mat-divider>
+              <div class="col-12 row">
+                <div class="col-1" style="text-align: center; align-self: center;">Sábado</div>
+                <div class="col-4 row">
+                  <div class="col-6">Desde
+                    <div class="input-group date" id="timepicker">
+                        <input type="time" class="form-control" id="selectHora">
+                    </div></div>
+                  <div class="col-6">Hasta
+                    <div class="input-group date" id="timepicker">
+                      <input type="time" class="form-control" id="selectHora">
+                  </div></div>
+                </div>
+                <div class="col-4 row">
+                  <div class="col-6">Desde
+                    <div class="input-group date" id="timepicker">
+                        <input type="time" class="form-control" id="selectHora">
+                    </div></div>
+                  <div class="col-6">Hasta
+                    <div class="input-group date" id="timepicker">
+                      <input type="time" class="form-control" id="selectHora">
+                  </div></div>
+                </div>
+                <div class="col-3" style="align-self: center;">
+                  <div class="form-check form-switch" style=" margin-left: 85px;">
+                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" style=" width: 60px; height: 20px;">
+                    <label class="form-check-label" for="flexSwitchCheckDefault"></label>
+                  </div>
+                </div>
+              </div>
+              <mat-divider style="margin: 20px 0;"></mat-divider>
+              <div class="col-12 row">
+                <div class="col-1" style="text-align: center; align-self: center;">Domingo</div>
+                <div class="col-4 row">
+                  <div class="col-6">Desde
+                    <div class="input-group date" id="timepicker">
+                        <input type="time" class="form-control" id="selectHora">
+                    </div></div>
+                  <div class="col-6">Hasta
+                    <div class="input-group date" id="timepicker">
+                      <input type="time" class="form-control" id="selectHora">
+                  </div></div>
+                </div>
+                <div class="col-4 row">
+                  <div class="col-6">Desde
+                    <div class="input-group date" id="timepicker">
+                        <input type="time" class="form-control" id="selectHora">
+                    </div></div>
+                  <div class="col-6">Hasta
+                    <div class="input-group date" id="timepicker">
+                      <input type="time" class="form-control" id="selectHora">
+                  </div></div>
+                </div>
+                <div class="col-3" style="align-self: center;">
+                  <div class="form-check form-switch" style=" margin-left: 85px;">
+                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" style=" width: 60px; height: 20px;">
+                    <label class="form-check-label" for="flexSwitchCheckDefault"></label>
+                  </div>
+                </div>
               </div>
             </div>
           </form>
@@ -130,6 +574,496 @@
       </div>
       <div class="modal-footer">
         <button type="submit" class="btn-primario" name="button" (click)="crearEmpleado()">Confirmar</button>
+        <button type="button" class="btn-secundario" name="button" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--Modal editar emopleado-->
+<div class="modal modal-xl fade" id="modal3">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exModalLabel">Editar empleado</h5>
+        <button type="button" class="btn-close" name="button" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <form>
+            <div class="row mb-3">
+              <label for="nombre2" class="col-3 col-form-label">Nombre</label>
+              <div class="col-9">
+                <input type="text" class="form-control" id="nombreEmp">
+              </div>
+            </div>
+            <div class="row mb-3 horario">
+              <label for="nombre2" class="col-3 col-form-label">Horario</label>
+              <div class="row col-12 titulos">
+                <div class="col-1">Día</div>
+                <div class="col-4">Rango 1</div>
+                <div class="col-4">Rango 2</div>
+                <div class="col-3">Libre</div>
+              </div>
+              <mat-divider style="margin: 20px 0;"></mat-divider>
+              <div class="col-12 row">
+                <div class="col-1" style="text-align: center; align-self: center;">Lunes</div>
+                <div class="col-4 row">
+                  <div class="col-6">Desde
+                    <div class="input-group date" id="timepicker">
+                        <input type="time" class="form-control" id="selectHora">
+                    </div></div>
+                  <div class="col-6">Hasta
+                    <div class="input-group date" id="timepicker">
+                      <input type="time" class="form-control" id="selectHora">
+                  </div></div>
+                </div>
+                <div class="col-4 row">
+                  <div class="col-6">Desde
+                    <div class="input-group date" id="timepicker">
+                        <input type="time" class="form-control" id="selectHora">
+                    </div></div>
+                  <div class="col-6">Hasta
+                    <div class="input-group date" id="timepicker">
+                      <input type="time" class="form-control" id="selectHora">
+                  </div></div>
+                </div>
+                <div class="col-3" style="align-self: center;">
+                  <div class="form-check form-switch" style=" margin-left: 85px;">
+                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" style=" width: 60px; height: 20px;" checked>
+                    <label class="form-check-label" for="flexSwitchCheckDefault"></label>
+                  </div>
+                </div>
+              </div>
+              <mat-divider style="margin: 20px 0;"></mat-divider>
+              <div class="col-12 row">
+                <div class="col-1" style="text-align: center; align-self: center;">Martes</div>
+                <div class="col-4 row">
+                  <div class="col-6">Desde
+                    <div class="input-group date" id="timepicker">
+                        <input type="time" class="form-control" id="selectHora11">
+                    </div></div>
+                  <div class="col-6">Hasta
+                    <div class="input-group date" id="timepicker">
+                      <input type="time" class="form-control" id="selectHora21">
+                  </div></div>
+                </div>
+                <div class="col-4 row">
+                  <div class="col-6">Desde
+                    <div class="input-group date" id="timepicker">
+                        <input type="time" class="form-control" id="selectHora">
+                    </div></div>
+                  <div class="col-6">Hasta
+                    <div class="input-group date" id="timepicker">
+                      <input type="time" class="form-control" id="selectHora">
+                  </div></div>
+                </div>
+                <div class="col-3" style="align-self: center;">
+                  <div class="form-check form-switch" style=" margin-left: 85px;">
+                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" style=" width: 60px; height: 20px;">
+                    <label class="form-check-label" for="flexSwitchCheckDefault"></label>
+                  </div>
+                </div>
+              </div>
+              <mat-divider style="margin: 20px 0;"></mat-divider>
+              <div class="col-12 row">
+                <div class="col-1" style="text-align: center; align-self: center;">Miércoles</div>
+                <div class="col-4 row">
+                  <div class="col-6">Desde
+                    <div class="input-group date" id="timepicker">
+                        <input type="time" class="form-control" id="selectHora12">
+                    </div></div>
+                  <div class="col-6">Hasta
+                    <div class="input-group date" id="timepicker">
+                      <input type="time" class="form-control" id="selectHora22">
+                  </div></div>
+                </div>
+                <div class="col-4 row">
+                  <div class="col-6">Desde
+                    <div class="input-group date" id="timepicker">
+                        <input type="time" class="form-control" id="selectHora">
+                    </div></div>
+                  <div class="col-6">Hasta
+                    <div class="input-group date" id="timepicker">
+                      <input type="time" class="form-control" id="selectHora">
+                  </div></div>
+                </div>
+                <div class="col-3" style="align-self: center;">
+                  <div class="form-check form-switch" style=" margin-left: 85px;">
+                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" style=" width: 60px; height: 20px;">
+                    <label class="form-check-label" for="flexSwitchCheckDefault"></label>
+                  </div>
+                </div>
+              </div>
+              <mat-divider style="margin: 20px 0;"></mat-divider>
+              <div class="col-12 row">
+                <div class="col-1" style="text-align: center; align-self: center;">Jueves</div>
+                <div class="col-4 row">
+                  <div class="col-6">Desde
+                    <div class="input-group date" id="timepicker">
+                        <input type="time" class="form-control" id="selectHora13">
+                    </div></div>
+                  <div class="col-6">Hasta
+                    <div class="input-group date" id="timepicker">
+                      <input type="time" class="form-control" id="selectHora23">
+                  </div></div>
+                </div>
+                <div class="col-4 row">
+                  <div class="col-6">Desde
+                    <div class="input-group date" id="timepicker">
+                        <input type="time" class="form-control" id="selectHora">
+                    </div></div>
+                  <div class="col-6">Hasta
+                    <div class="input-group date" id="timepicker">
+                      <input type="time" class="form-control" id="selectHora">
+                  </div></div>
+                </div>
+                <div class="col-3" style="align-self: center;">
+                  <div class="form-check form-switch" style=" margin-left: 85px;">
+                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" style=" width: 60px; height: 20px;">
+                    <label class="form-check-label" for="flexSwitchCheckDefault"></label>
+                  </div>
+                </div>
+              </div>
+              <mat-divider style="margin: 20px 0;"></mat-divider>
+              <div class="col-12 row">
+                <div class="col-1" style="text-align: center; align-self: center;">Viernes</div>
+                <div class="col-4 row">
+                  <div class="col-6">Desde
+                    <div class="input-group date" id="timepicker">
+                        <input type="time" class="form-control" id="selectHora14">
+                    </div></div>
+                  <div class="col-6">Hasta
+                    <div class="input-group date" id="timepicker">
+                      <input type="time" class="form-control" id="selectHora24">
+                  </div></div>
+                </div>
+                <div class="col-4 row">
+                  <div class="col-6">Desde
+                    <div class="input-group date" id="timepicker">
+                        <input type="time" class="form-control" id="selectHora">
+                    </div></div>
+                  <div class="col-6">Hasta
+                    <div class="input-group date" id="timepicker">
+                      <input type="time" class="form-control" id="selectHora">
+                  </div></div>
+                </div>
+                <div class="col-3" style="align-self: center;">
+                  <div class="form-check form-switch" style=" margin-left: 85px;">
+                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" style=" width: 60px; height: 20px;">
+                    <label class="form-check-label" for="flexSwitchCheckDefault"></label>
+                  </div>
+                </div>
+              </div>
+              <mat-divider style="margin: 20px 0;"></mat-divider>
+              <div class="col-12 row">
+                <div class="col-1" style="text-align: center; align-self: center;">Sábado</div>
+                <div class="col-4 row">
+                  <div class="col-6">Desde
+                    <div class="input-group date" id="timepicker">
+                        <input type="time" class="form-control" id="selectHora">
+                    </div></div>
+                  <div class="col-6">Hasta
+                    <div class="input-group date" id="timepicker">
+                      <input type="time" class="form-control" id="selectHora">
+                  </div></div>
+                </div>
+                <div class="col-4 row">
+                  <div class="col-6">Desde
+                    <div class="input-group date" id="timepicker">
+                        <input type="time" class="form-control" id="selectHora">
+                    </div></div>
+                  <div class="col-6">Hasta
+                    <div class="input-group date" id="timepicker">
+                      <input type="time" class="form-control" id="selectHora">
+                  </div></div>
+                </div>
+                <div class="col-3" style="align-self: center;">
+                  <div class="form-check form-switch" style=" margin-left: 85px;">
+                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" style=" width: 60px; height: 20px;" checked>
+                    <label class="form-check-label" for="flexSwitchCheckDefault"></label>
+                  </div>
+                </div>
+              </div>
+              <mat-divider style="margin: 20px 0;"></mat-divider>
+              <div class="col-12 row">
+                <div class="col-1" style="text-align: center; align-self: center;">Domingo</div>
+                <div class="col-4 row">
+                  <div class="col-6">Desde
+                    <div class="input-group date" id="timepicker">
+                        <input type="time" class="form-control" id="selectHora">
+                    </div></div>
+                  <div class="col-6">Hasta
+                    <div class="input-group date" id="timepicker">
+                      <input type="time" class="form-control" id="selectHora">
+                  </div></div>
+                </div>
+                <div class="col-4 row">
+                  <div class="col-6">Desde
+                    <div class="input-group date" id="timepicker">
+                        <input type="time" class="form-control" id="selectHora">
+                    </div></div>
+                  <div class="col-6">Hasta
+                    <div class="input-group date" id="timepicker">
+                      <input type="time" class="form-control" id="selectHora">
+                  </div></div>
+                </div>
+                <div class="col-3" style="align-self: center;">
+                  <div class="form-check form-switch" style=" margin-left: 85px;">
+                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" style=" width: 60px; height: 20px;" checked>
+                    <label class="form-check-label" for="flexSwitchCheckDefault"></label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn-primario" name="button" (click)="crearEmpleado()">Confirmar</button>
+        <button type="button" class="btn-secundario" name="button" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--Modal editar horario-->
+<div class="modal modal-xl fade" id="modal4">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exModalLabel">Editar horario</h5>
+        <button type="button" class="btn-close" name="button" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <form>
+            <div class="row mb-3 horario">
+              <label for="nombre2" class="col-3 col-form-label">Horario</label>
+              <div class="row col-12 titulos">
+                <div class="col-1">Día</div>
+                <div class="col-4">Rango 1</div>
+                <div class="col-4">Rango 2</div>
+                <div class="col-3">Cerrado</div>
+              </div>
+              <mat-divider style="margin: 20px 0;"></mat-divider>
+              <div class="col-12 row">
+                <div class="col-1" style="text-align: center; align-self: center;">Lunes</div>
+                <div class="col-4 row">
+                  <div class="col-6">Desde
+                    <div class="input-group date" id="timepicker">
+                        <input type="time" class="form-control" id="selectHorario1">
+                    </div></div>
+                  <div class="col-6">Hasta
+                    <div class="input-group date" id="timepicker">
+                      <input type="time" class="form-control" id="selectHorario12">
+                  </div></div>
+                </div>
+                <div class="col-4 row">
+                  <div class="col-6">Desde
+                    <div class="input-group date" id="timepicker">
+                        <input type="time" class="form-control" id="selectHorario3">
+                    </div></div>
+                  <div class="col-6">Hasta
+                    <div class="input-group date" id="timepicker">
+                      <input type="time" class="form-control" id="selectHorario4">
+                  </div></div>
+                </div>
+                <div class="col-3" style="align-self: center;">
+                  <div class="form-check form-switch" style=" margin-left: 85px;">
+                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" style=" width: 60px; height: 20px;" checked>
+                    <label class="form-check-label" for="flexSwitchCheckDefault"></label>
+                  </div>
+                </div>
+              </div>
+              <mat-divider style="margin: 20px 0;"></mat-divider>
+              <div class="col-12 row">
+                <div class="col-1" style="text-align: center; align-self: center;">Martes</div>
+                <div class="col-4 row">
+                  <div class="col-6">Desde
+                    <div class="input-group date" id="timepicker">
+                        <input type="time" class="form-control" id="selectHorario5">
+                    </div></div>
+                  <div class="col-6">Hasta
+                    <div class="input-group date" id="timepicker">
+                      <input type="time" class="form-control" id="selectHorario6">
+                  </div></div>
+                </div>
+                <div class="col-4 row">
+                  <div class="col-6">Desde
+                    <div class="input-group date" id="timepicker">
+                        <input type="time" class="form-control" id="selectHorario7">
+                    </div></div>
+                  <div class="col-6">Hasta
+                    <div class="input-group date" id="timepicker">
+                      <input type="time" class="form-control" id="selectHorario8">
+                  </div></div>
+                </div>
+                <div class="col-3" style="align-self: center;">
+                  <div class="form-check form-switch" style=" margin-left: 85px;">
+                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" style=" width: 60px; height: 20px;">
+                    <label class="form-check-label" for="flexSwitchCheckDefault"></label>
+                  </div>
+                </div>
+              </div>
+              <mat-divider style="margin: 20px 0;"></mat-divider>
+              <div class="col-12 row">
+                <div class="col-1" style="text-align: center; align-self: center;">Miércoles</div>
+                <div class="col-4 row">
+                  <div class="col-6">Desde
+                    <div class="input-group date" id="timepicker">
+                        <input type="time" class="form-control" id="selectHorario9">
+                    </div></div>
+                  <div class="col-6">Hasta
+                    <div class="input-group date" id="timepicker">
+                      <input type="time" class="form-control" id="selectHorario10">
+                  </div></div>
+                </div>
+                <div class="col-4 row">
+                  <div class="col-6">Desde
+                    <div class="input-group date" id="timepicker">
+                        <input type="time" class="form-control" id="selectHorario11">
+                    </div></div>
+                  <div class="col-6">Hasta
+                    <div class="input-group date" id="timepicker">
+                      <input type="time" class="form-control" id="selectHorario12">
+                  </div></div>
+                </div>
+                <div class="col-3" style="align-self: center;">
+                  <div class="form-check form-switch" style=" margin-left: 85px;">
+                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" style=" width: 60px; height: 20px;">
+                    <label class="form-check-label" for="flexSwitchCheckDefault"></label>
+                  </div>
+                </div>
+              </div>
+              <mat-divider style="margin: 20px 0;"></mat-divider>
+              <div class="col-12 row">
+                <div class="col-1" style="text-align: center; align-self: center;">Jueves</div>
+                <div class="col-4 row">
+                  <div class="col-6">Desde
+                    <div class="input-group date" id="timepicker">
+                        <input type="time" class="form-control" id="selectHorario13">
+                    </div></div>
+                  <div class="col-6">Hasta
+                    <div class="input-group date" id="timepicker">
+                      <input type="time" class="form-control" id="selectHorario14">
+                  </div></div>
+                </div>
+                <div class="col-4 row">
+                  <div class="col-6">Desde
+                    <div class="input-group date" id="timepicker">
+                        <input type="time" class="form-control" id="selectHorario15">
+                    </div></div>
+                  <div class="col-6">Hasta
+                    <div class="input-group date" id="timepicker">
+                      <input type="time" class="form-control" id="selectHorario16">
+                  </div></div>
+                </div>
+                <div class="col-3" style="align-self: center;">
+                  <div class="form-check form-switch" style=" margin-left: 85px;">
+                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" style=" width: 60px; height: 20px;">
+                    <label class="form-check-label" for="flexSwitchCheckDefault"></label>
+                  </div>
+                </div>
+              </div>
+              <mat-divider style="margin: 20px 0;"></mat-divider>
+              <div class="col-12 row">
+                <div class="col-1" style="text-align: center; align-self: center;">Viernes</div>
+                <div class="col-4 row">
+                  <div class="col-6">Desde
+                    <div class="input-group date" id="timepicker">
+                        <input type="time" class="form-control" id="selectHorario17">
+                    </div></div>
+                  <div class="col-6">Hasta
+                    <div class="input-group date" id="timepicker">
+                      <input type="time" class="form-control" id="selectHorario18">
+                  </div></div>
+                </div>
+                <div class="col-4 row">
+                  <div class="col-6">Desde
+                    <div class="input-group date" id="timepicker">
+                        <input type="time" class="form-control" id="selectHorario19">
+                    </div></div>
+                  <div class="col-6">Hasta
+                    <div class="input-group date" id="timepicker">
+                      <input type="time" class="form-control" id="selectHorario20">
+                  </div></div>
+                </div>
+                <div class="col-3" style="align-self: center;">
+                  <div class="form-check form-switch" style=" margin-left: 85px;">
+                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" style=" width: 60px; height: 20px;">
+                    <label class="form-check-label" for="flexSwitchCheckDefault"></label>
+                  </div>
+                </div>
+              </div>
+              <mat-divider style="margin: 20px 0;"></mat-divider>
+              <div class="col-12 row">
+                <div class="col-1" style="text-align: center; align-self: center;">Sábado</div>
+                <div class="col-4 row">
+                  <div class="col-6">Desde
+                    <div class="input-group date" id="timepicker">
+                        <input type="time" class="form-control" id="selectHorario21">
+                    </div></div>
+                  <div class="col-6">Hasta
+                    <div class="input-group date" id="timepicker">
+                      <input type="time" class="form-control" id="selectHorario22">
+                  </div></div>
+                </div>
+                <div class="col-4 row">
+                  <div class="col-6">Desde
+                    <div class="input-group date" id="timepicker">
+                        <input type="time" class="form-control" id="selectHorario23">
+                    </div></div>
+                  <div class="col-6">Hasta
+                    <div class="input-group date" id="timepicker">
+                      <input type="time" class="form-control" id="selectHorario24">
+                  </div></div>
+                </div>
+                <div class="col-3" style="align-self: center;">
+                  <div class="form-check form-switch" style=" margin-left: 85px;">
+                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" style=" width: 60px; height: 20px;" checked>
+                    <label class="form-check-label" for="flexSwitchCheckDefault"></label>
+                  </div>
+                </div>
+              </div>
+              <mat-divider style="margin: 20px 0;"></mat-divider>
+              <div class="col-12 row">
+                <div class="col-1" style="text-align: center; align-self: center;">Domingo</div>
+                <div class="col-4 row">
+                  <div class="col-6">Desde
+                    <div class="input-group date" id="timepicker">
+                        <input type="time" class="form-control" id="selectHorario25">
+                    </div></div>
+                  <div class="col-6">Hasta
+                    <div class="input-group date" id="timepicker">
+                      <input type="time" class="form-control" id="selectHorario26">
+                  </div></div>
+                </div>
+                <div class="col-4 row">
+                  <div class="col-6">Desde
+                    <div class="input-group date" id="timepicker">
+                        <input type="time" class="form-control" id="selectHorario27">
+                    </div></div>
+                  <div class="col-6">Hasta
+                    <div class="input-group date" id="timepicker">
+                      <input type="time" class="form-control" id="selectHorario27">
+                  </div></div>
+                </div>
+                <div class="col-3" style="align-self: center;">
+                  <div class="form-check form-switch" style=" margin-left: 85px;">
+                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" style=" width: 60px; height: 20px;" checked>
+                    <label class="form-check-label" for="flexSwitchCheckDefault"></label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn-primario" name="button">Confirmar</button>
         <button type="button" class="btn-secundario" name="button" data-bs-dismiss="modal">Cerrar</button>
       </div>
     </div>

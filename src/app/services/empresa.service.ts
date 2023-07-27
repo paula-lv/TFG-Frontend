@@ -9,8 +9,8 @@ export class EmpresaService {
 
     constructor(private httpClient: HttpClient, private authService: AuthService) { }
 
-    getEmpresas(): Observable<any> {
-        return this.httpClient.get(this.url)
+    getEmpresas(servicio: any, pobl: any, prov: any, valor: any, fechaDesde:any, fechaHasta: any, todas: boolean): Observable<any> {
+        return this.httpClient.get(this.url, { params: { servicio : servicio, pobl: pobl, prov: prov, valor: valor, fechaDesde: fechaDesde, fechaHasta: fechaHasta, todas: todas }} );
     }
 
     getEmpresa(email: any): Observable<any> {

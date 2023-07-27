@@ -12,12 +12,15 @@ import { CalendarioEmpresaComponent } from './pages/empresa/calendario-empresa/c
 import { CalendarioUsuarioComponent } from './pages/usuario/calendario-usuario/calendario-usuario.component';
 import { EmpleadosComponent } from './pages/empresa/empleados/empleados.component';
 import { ResenaComponent } from './shared/resena/resena.component';
+import { PoliticaPrivacidadComponent } from './pages/politica-privacidad/politica-privacidad/politica-privacidad.component';
+import { CondicionesUsoComponent } from './pages/condicionesuso/condiciones-uso/condiciones-uso.component';
+import { CitaListadoComponent } from './shared/cita-listado/cita-listado.component';
 
 const routes: Routes = [
   { path: 'inicio', component: InicioComponent },
   { path: '', component: InicioComponent },
   { path: 'contacto', component: ContactoComponent },
-  { path: 'nosotros', component: AboutUsComponent },
+  { path: 'nosotras', component: AboutUsComponent },
   { path: 'login', component: LoginComponent },
   { path: 'registro', component: RegistroComponent },
   { path: 'recuperar', component: RecuperarComponent },
@@ -27,6 +30,8 @@ const routes: Routes = [
   { path: 'miCalendario', component: CalendarioUsuarioComponent },
   { path: 'empleados', component: EmpleadosComponent },
   { path: 'opiniones', component: ResenaComponent },
+  { path: 'privacidad', component: PoliticaPrivacidadComponent },
+  { path: 'condiciones', component: CondicionesUsoComponent },
 
 ];
 

@@ -4,6 +4,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import esLocale from '@fullcalendar/core/locales/es';
+import { CitaService } from 'src/app/services/cita.service';
 
 @Component({
   selector: 'app-calendario-empresa',
@@ -15,7 +16,9 @@ export class CalendarioEmpresaComponent implements OnInit {
   public events: any[];
   public options: any;
 
-  constructor() { }
+  cargado = false;
+
+  constructor(private citaService: CitaService) { }
 
   ngOnInit(): void {
     this.options = {
@@ -32,30 +35,22 @@ export class CalendarioEmpresaComponent implements OnInit {
     }
 
     this.events = [
-      {
-        title: "Corte de pelo",
-        start: new Date(),
-        description: "Corte de pelo uwu",
-        classNames: ['peluqueria']
-      },
-      {
-        title: "Tinte",
-        start: new Date(new Date().getTime() + 3600000),
-        description: "Tinte fantasía pelo corto",
-        classNames: ['peluqueria']
-      },
-      {
-        title: "Manicura",
-        start: new Date(new Date().getTime() + 86400000),
-        description: "Francesa"
-      },
-      {
-        title: "Pedicura",
-        start: new Date(new Date().getTime() + 86400000 * 2),
-        end: new Date(new Date().getTime() + 86400000 * 3),
-        description: "Permanente"
-      },
     ]
+
+    this.citaService.getCitas(JSON.parse(localStorage.getItem('usuario')!).email, false, false).subscribe(res => {
+      let citas = res;
+      for(let i = 0; i < citas.length; i++) {
+        let evento = {
+          title: citas[i].servicio,
+          start: new Date(citas[i].fecha_desde).getTime() - (3600000*2),
+          end: new Date(citas[i].fecha_hasta).getTime() - (3600000*2),
+          color: '#51D5B8',
+          description: citas[i].empresa,
+        }
+        this.events.push(evento)
+      }
+      this.cargado = true
+    })
   }
 
 }

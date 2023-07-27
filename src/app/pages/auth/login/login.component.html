@@ -1,7 +1,7 @@
 <section>
     <div class="login">
         <form [formGroup]="loginForm" class="custom-form">
-            <img src="assets/images/logo1.png" alt="Logo freeme" width="300" height="100">
+            <h1 class="nombreApp">Freeme</h1>
             <input type="email" class="form-control" formControlName="email" placeholder="Email" [ngClass]="{ 'is-invalid': form.email.errors }" />
             <div *ngIf="form.email.errors && form.email.touched" class="invalid-feedback">
                 <div *ngIf="form.email.errors.required">El email es obligatorio</div>

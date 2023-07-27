@@ -1,5 +1,155 @@
 <section style="min-height: 77%;">
         <div class="row">
+            <div class="col-12">
+                <div class="accordion" id="accordionExample">
+                    <div class="accordion-item">
+                      <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                          Tu información
+                        </button>
+                      </h2>
+                      <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <form [formGroup]="infoForm" class="custom-form" method="post">
+                                <div class="row">
+                                    <div class="row col-6">
+                                        <label for="name">Nombre</label>
+                                        <input [disabled]="this.isEditable"  type="text" id="name" class="form-control" formControlName="name" placeholder="Nombre" />
+                                        <div *ngIf="form.name.errors && form.name.touched" class="invalid-feedback"></div>
+                                    </div>
+                                    <div class="row col-6">
+                                        <label for="email">Email</label>
+                                        <input type="email" class="form-control" formControlName="email" placeholder="Email" [ngClass]="{ 'is-invalid': form.email.errors }" />
+                                        <div *ngIf="form.email.errors" class="invalid-feedback">
+                                            <div *ngIf="form.email.errors.email">El email debe ser válido</div>
+                                        </div>
+                                    </div>     
+                                </div>
+                                <div class="row">
+                                    <div class="row col-6">
+                                        <label for="tlf">Teléfono</label>
+                                        <input type="text" class="form-control" formControlName="tlf" placeholder="Teléfono" [ngClass]="{ 'is-invalid': form.tlf.errors }" />
+                                        <div *ngIf="form.tlf.errors && form.tlf.touched" class="invalid-feedback">
+                                            <div *ngIf="form.tlf.errors.minLength">El teléfono debe ser válido</div>
+                                        </div>
+                                    </div>
+                                    <div class="row col-3">
+                                        <label for="prov">Provincia</label>
+                                        <mat-select name="prov" placeholder="Provincia" [(ngModel)]="provSelect" [ngModelOptions]="{standalone: true}" (selectionChange)="selectProvincia()">
+                                            <mat-option [value]="item" *ngFor="let item of provincias">{{item.label}}</mat-option>
+                                        </mat-select>
+                                    </div>
+                                    <div class="row col-3">
+                                        <label for="pobl">Población</label>
+                                        <mat-select name="pobl" placeholder="Población" [(ngModel)]="poblSelect" [ngModelOptions]="{standalone: true}" (selectionChange)="selectCiudad()">
+                                            <mat-option [value]="item" *ngFor="let item of poblaciones">{{item.label}}</mat-option>
+                                        </mat-select>
+                                    </div>
+                                </div>
+                                <div class="centrar">
+                                    <button class="btn-primario" style="margin-top: 40px;" type="submit" [disabled]="infoForm.invalid" (click)="onSubmit()">Aceptar</button>
+                                </div>
+                            </form>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="accordion-item">
+                      <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                          Próximas citas
+                        </button>
+                      </h2>
+                      <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                        <div class="accordion-body citas">
+                          <div *ngFor="let cita of citas" class="cita">
+                            <div class="fecha">
+                              {{formatearFecha(cita.fecha_desde)}}
+                            </div>
+                            <div class="datos">
+                              
+                              <button type="button" class="btn-primario" data-bs-toggle="modal" data-bs-target="#modal1" (click)="setEmpresa(cita)">
+                                <p><mat-icon>place</mat-icon> {{ cita.empresa }}</p>   
+                              </button>
+                              <div class="row">
+                                <div class="col-6"><mat-icon>assignment_ind</mat-icon> {{cita.empleado}}</div>
+                                <div class="col-6"><mat-icon>local_play</mat-icon> {{cita.servicio}}</div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="accordion-item">
+                      <h2 class="accordion-header" id="headingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                          Tus reseñas
+                        </button>
+                      </h2>
+                      <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                          <div *ngFor="let resena of resenas" class="resenas">
+                            <div class="row">
+                              <div class="col-6 titulo">
+                                {{ resena.empresa }}
+                              </div>
+                              <div class="col-6 estrellas" *ngIf="resena.valoracion == 1">
+                                <mat-icon>grade</mat-icon>
+                                <mat-icon>star_border</mat-icon>
+                                <mat-icon>star_border</mat-icon>
+                                <mat-icon>star_border</mat-icon>
+                                <mat-icon>star_border</mat-icon>
+                              </div>
+                              <div class="col-6 estrellas" *ngIf="resena.valoracion == 2">
+                                <mat-icon>grade</mat-icon>
+                                <mat-icon>grade</mat-icon>
+                                <mat-icon>star_border</mat-icon>
+                                <mat-icon>star_border</mat-icon>
+                                <mat-icon>star_border</mat-icon>
+                              </div>
+                              <div class="col-6 estrellas" *ngIf="resena.valoracion == 3">
+                                <mat-icon>grade</mat-icon>
+                                <mat-icon>grade</mat-icon>
+                                <mat-icon>grade</mat-icon>
+                                <mat-icon>star_border</mat-icon>
+                                <mat-icon>star_border</mat-icon> 
+                              </div>
+                              <div class="col-6 estrellas" *ngIf="resena.valoracion == 4">
+                                <mat-icon>grade</mat-icon>
+                                <mat-icon>grade</mat-icon>
+                                <mat-icon>grade</mat-icon> 
+                                <mat-icon>grade</mat-icon> 
+                                <mat-icon>star_border</mat-icon>
+                              </div>
+                              <div class="col-6 estrellas" *ngIf="resena.valoracion == 5">
+                                <mat-icon>grade</mat-icon>
+                                <mat-icon>grade</mat-icon> 
+                                <mat-icon>grade</mat-icon>
+                                <mat-icon>grade</mat-icon> 
+                                <mat-icon>grade</mat-icon>
+                              </div>
+                              <div class="row">{{getPoblacion(resena.provincia, resena.poblacion)}}, {{getProvincia(resena.provincia)}}</div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="row mensaje">{{resena.mensaje}}</div>
+                              <p class="fecha2">{{formatearFecha(resena.fecha_desde)}}</p>
+                            </div>
+                            <hr>
+                            <div class="row">
+                              <div class="col-6">
+                                Servicio: <span>{{resena.servicio}}</span>
+                              </div>
+                              <div class="col-6 empleado">
+                                Le atendió: <span>{{resena.empleado}}</span>
+                              </div>
+                            </div>
+                            
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+            </div>
             <div class="col-8">
                 
             </div>
@@ -8,3 +158,34 @@
             </div>
         </div>
 </section>
+
+<!-- Modal añadir servicio -->
+<div class="modal fade" id="modal1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exModalLabel">{{empresaModal.empresa}}</h5>
+        <button type="button" class="btn-close" name="button" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid row">
+          <div class="col-6">
+            <p class="titulo">Ubicación</p>
+            <hr>
+            <p>{{empresaModal.direccion}}</p>
+            <p>{{getPoblacion(empresaModal.provincia, empresaModal.poblacion)}}</p>
+            <p>{{getProvincia(empresaModal.provincia)}}</p>
+          </div>
+          <div class="col-6">
+            <p class="titulo">Contacto</p>
+            <hr>
+            <p>Teléfono: {{empresaModal.telefono}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-secundario" name="button" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -31,15 +31,18 @@ import { AuthService } from './services/auth.service';
 import { EmpresaService } from './services/empresa.service';
 import { EmpleadoService } from './services/empleado.service';
 import { ServicioService } from './services/servicio.service';
-import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { MatCardModule } from '@angular/material/card';
 import {MatSelectModule} from '@angular/material/select';
 import { Observable } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import { ColorPickerModule } from 'ngx-color-picker';
-import { ResenaService } from './services/resena.service';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { CalendarioEmpresaComponent } from './pages/empresa/calendario-empresa/calendario-empresa.component';
+import { CitaService } from './services/cita.service';
+import { PoliticaPrivacidadComponent } from './pages/politica-privacidad/politica-privacidad/politica-privacidad.component';
+import { CondicionesUsoComponent } from './pages/condicionesuso/condiciones-uso/condiciones-uso.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 const routes: Routes = [
   {
@@ -87,10 +90,13 @@ export class CustomInterceptor implements HttpInterceptor {
     RecuperarComponent,
     PerfilEmpresaComponent,
     CalendarioEmpresaComponent,
-    CalendarioUsuarioComponent
+    CalendarioUsuarioComponent,
+    PerfilUsuarioComponent,
+    PoliticaPrivacidadComponent,
+    CondicionesUsoComponent,
   ],
   imports: [
-    BrowserModule, ColorPickerModule, FullCalendarModule,
+    BrowserModule, ColorPickerModule, FullCalendarModule, NgSelectModule,
     AppRoutingModule,
     RouterModule.forRoot([
       {path: 'usuario-perfil', component: PerfilUsuarioComponent},
@@ -108,7 +114,7 @@ export class CustomInterceptor implements HttpInterceptor {
     MatCardModule,
     MatSelectModule
   ],
-  providers: [AuthService, EmpresaService, CookieService, EmpleadoService, ServicioService, ResenaService,
+  providers: [AuthService, EmpresaService, CookieService, EmpleadoService, ServicioService, CitaService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: CustomInterceptor ,

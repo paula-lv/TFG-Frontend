@@ -1,1 +1,61 @@
-<p>resena works!</p>
+<section>
+    <h1>Tus reseñas</h1>
+    <mat-divider style="margin: 20px 0 30px 0;"></mat-divider>
+    <div *ngFor="let resena of resenas" class="resenas tarjeta col">
+        <div class="row">
+          <div class="col-6 titulo2">
+            {{ resena.cliente }}
+          </div>
+          <div class="col-6 estrellas" *ngIf="resena.valoracion == 1">
+            <mat-icon class="mat-iconPersonalizar">grade</mat-icon>
+            <mat-icon class="mat-iconPersonalizar">star_border</mat-icon>
+            <mat-icon class="mat-iconPersonalizar">star_border</mat-icon>
+            <mat-icon class="mat-iconPersonalizar">star_border</mat-icon>
+            <mat-icon class="mat-iconPersonalizar">star_border</mat-icon>
+          </div>
+          <div class="col-6 estrellas" *ngIf="resena.valoracion == 2">
+            <mat-icon class="mat-iconPersonalizar">grade</mat-icon>
+            <mat-icon class="mat-iconPersonalizar">grade</mat-icon>
+            <mat-icon class="mat-iconPersonalizar">star_border</mat-icon>
+            <mat-icon class="mat-iconPersonalizar">star_border</mat-icon>
+            <mat-icon class="mat-iconPersonalizar">star_border</mat-icon>
+          </div>
+          <div class="col-6 estrellas" *ngIf="resena.valoracion == 3">
+            <mat-icon class="mat-iconPersonalizar">grade</mat-icon>
+            <mat-icon class="mat-iconPersonalizar">grade</mat-icon>
+            <mat-icon class="mat-iconPersonalizar">grade</mat-icon>
+            <mat-icon class="mat-iconPersonalizar">star_border</mat-icon>
+            <mat-icon class="mat-iconPersonalizar">star_border</mat-icon> 
+          </div>
+          <div class="col-6 estrellas" *ngIf="resena.valoracion == 4">
+            <mat-icon class="mat-iconPersonalizar">grade</mat-icon>
+            <mat-icon class="mat-iconPersonalizar">grade</mat-icon>
+            <mat-icon class="mat-iconPersonalizar">grade</mat-icon> 
+            <mat-icon class="mat-iconPersonalizar">grade</mat-icon> 
+            <mat-icon class="mat-iconPersonalizar">star_border</mat-icon>
+          </div>
+          <div class="col-6 estrellas" *ngIf="resena.valoracion == 5">
+            <mat-icon class="mat-iconPersonalizar">grade</mat-icon>
+            <mat-icon class="mat-iconPersonalizar">grade</mat-icon> 
+            <mat-icon class="mat-iconPersonalizar">grade</mat-icon>
+            <mat-icon class="mat-iconPersonalizar">grade</mat-icon> 
+            <mat-icon class="mat-iconPersonalizar">grade</mat-icon>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="row mensaje">{{resena.mensaje}}</div>
+          <p class="fecha2">{{formatearFecha(resena.fecha_desde)}}</p>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-6">
+            Servicio: <span style="font-weight: bold;">{{resena.servicio}}</span>
+          </div>
+          <div class="col-6 empleado">
+            Le atendió: <span style="font-weight: bold;">{{resena.empleado}}</span>
+          </div>
+        </div>
+        
+      </div>
+</section>

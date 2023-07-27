@@ -37,13 +37,19 @@ export class AuthService {
                     if(res.dataUser.tipo == 1)
                     {
                         environment.tipoUsuario = 1;
+                        this.router.navigateByUrl('/tuPerfil');
                     } else {
                         environment.tipoUsuario = 0;
+                        this.router.navigateByUrl('/');
                     }
-                    this.router.navigateByUrl('/');
+                    
                 } 
             }
         ));
+    }
+
+    getInfoUser(user:any): Observable<any> {
+        return this.httpClient.get(`${this.AUTH_SERVER}/usuario/`+user, { withCredentials: true});
     }
 
     logout(): void {

@@ -56,6 +56,10 @@ section {
     cursor: pointer;
   }
 
+  .custom-form button:hover {
+    background-color: var(--verde2);
+  }
+
   input:focus {
     outline: none;
   }
@@ -68,4 +72,10 @@ section {
 
   .invalid-feedback {
     text-align: left;
+  }
+
+  .nombreApp {
+    font-family: 'Borel', cursive;
+    font-size: 60px;
+    margin-top: 30px;
   }

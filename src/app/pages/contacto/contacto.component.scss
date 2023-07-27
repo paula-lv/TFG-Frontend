@@ -1,0 +1,40 @@
+section {
+    max-width: 1200px;
+    margin: 50px auto;
+    background-color: white;
+    padding: 60px;
+}
+
+h1 {
+    font-family: "Nunito", sans-serif;
+    font-size: 35px;
+    font-weight: 800;
+}
+
+h2 {
+    font-family: "Nunito", sans-serif;
+    font-size: 25px;
+    font-weight: 600;
+    margin: 20px 0px;
+}
+
+h3 {
+    font-family: "Nunito", sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+p, li{
+    font-family: "Nunito", sans-serif;
+    font-size: 20px;
+    font-weight: 400; 
+}
+
+.app {
+    color: var(--verde);
+    font-weight: 800; 
+}
+
+.bold {
+    font-weight: 800;
+}

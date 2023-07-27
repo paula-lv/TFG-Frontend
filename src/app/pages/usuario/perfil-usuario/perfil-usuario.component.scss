@@ -2,3 +2,160 @@
     margin-right: auto !important;
     margin-left: auto !important;
 }
+
+section {
+    max-width: 1200px;
+    margin: 50px auto;
+}
+  .custom-form {
+    margin: 0px auto;
+    padding: 1rem 3rem 2rem 3rem;
+    margin: auto;
+    border-bottom-right-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+    color: black;
+    text-align: center;
+  }
+
+  .custom-form input {
+    display: block;
+    margin: 1rem 0 0 0;
+    width: 100%;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    border: none;
+    box-shadow: inset -5px -5px 15px rgba(255, 255, 255, 0.8), inset 5px 5px 10px
+        rgba(0, 0, 0, 0.1);
+    border: 0 none;
+    background: #ebf5fc;
+    width: 100%;
+  }
+
+  input:focus {
+    outline: none;
+  }
+
+  .centrar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .invalid-feedback {
+    text-align: left;
+  }
+
+  mat-select {
+    display: block;
+    margin: 1rem 0 0 0;
+    width: 100%;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    border: none;
+    box-shadow: inset -5px -5px 15px rgba(255, 255, 255, 0.8), inset 5px 5px 10px
+        rgba(0, 0, 0, 0.1);
+    border: 0 none;
+    background: #ebf5fc;
+    text-align: left;
+    color: #212529
+
+  }
+
+  label {
+    text-align: left;
+    margin-top: 10px;
+    font-family: "Nunito", sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .accordion-button {
+    font-family: "Nunito", sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  .cita {
+    width: 32%;
+    border-radius: 15px;
+    border: solid 5px #d7d7d7;
+    text-align: center;
+    margin: 10px;
+    flex-grow: 1;
+  }
+
+  .fecha {
+    padding: 10px;
+    background-color: #d7d7d7;
+    font-family: "Nunito", sans-serif;
+    font-size: 17px;
+    font-weight: 800;
+  }
+
+  .datos {
+    padding: 10px;
+    font-family: "Nunito", sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: -webkit-center;
+  }
+
+  mat-icon {
+    vertical-align: middle;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  .titulo {
+    font-family: "Nunito", sans-serif;
+    font-size: 19px;
+    font-weight: 800;
+  }
+
+  button {
+    margin-bottom: 10px;
+  }
+
+  .citas {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .estrellas {
+    text-align: right;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--verde);
+}
+
+.fecha2 {
+  font-family: "Nunito", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #727272;
+  text-align: right;
+}
+
+.resenas {
+  font-family: "Nunito", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  border-radius: 15px;
+  border: solid 1px #d7d7d7;
+  padding: 25px;
+  margin-bottom: 20px;
+}
+
+.empleado {
+  text-align: right;
+}
+
+span {
+  font-weight: bold;
+}
+
+.mensaje {
+  font-size: 17px;
+}

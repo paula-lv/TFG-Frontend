@@ -1,25 +1,332 @@
 <section>
-    <div class="contenedor">
-        <mat-card class="tarjeta container" *ngFor="let empresa of empresas; index as i;">
-            <mat-card-header *ngIf="empresas.length != 0">
-                <div class="col-1" *ngIf="empresa.logo != ''"><img src="{{empresa.logo}}" class="circular"></div>
-                <div class="col-1" *ngIf="empresa.logo == ''"><img src="../../../assets/images/sin-foto.jpg" class="circular"></div>
-                <div class="col-11">
-                    <mat-card-title>{{empresa.nombre}}</mat-card-title>
-                    <mat-card-subtitle>{{empresa.descripcion}}</mat-card-subtitle>
-                    <div style="visibility: hidden;">
-                        {{personalizarEmpresas(i)}}
+    <div class="row gy-5">
+        <div class="col-md-8" >
+            <div class="filtros" style="margin-bottom: 15px;">
+                <h1>Búsqueda de citas</h1>
+                <div class="row">
+                    <div class="col-6">
+                        <p class="label">Servicios</p>
+                        <select class="form-select" aria-label="Servicios" id="selectServicio" onchange="filtrarEmpresas('servicio')">
+                            <option value="0" selected>Todos los servicios</option>
+                            <option value="1">Corte de pelo</option>
+                            <option value="2">Manicura</option>
+                            <option value="3">Pedicura</option>
+                            <option value="4">Maquillaje</option>
+                        </select>
+                    </div>
+                    <div class="col-6">
+                        <p class="label">Cercanía</p>
+                        <select class="form-select" aria-label="Cercanía" id="selectCercania" onchange="filtrarEmpresas('cercania')">
+                            <option value="0" selected>Misma ciudad</option>
+                            <option value="1">Misma provincia</option>
+                            <option value="2">Todos</option>
+                        </select>
+                    </div>
+                    <div class="col-3">
+                        <p class="label">Fecha</p>
+                        <div class="input-group date" id="datepicker">
+                            <input type="date" class="form-control" id="selectFecha" onchange="filtrarEmpresas('fecha')">
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <p class="label">Hora inicio</p>
+                        <div class="input-group date" id="timepicker">
+                            <input type="time" class="form-control" id="selectHora" onchange="filtrarEmpresas('hora')">
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <p class="label">Hora fin</p>
+                        <div class="input-group date" id="timepicker">
+                            <input type="time" class="form-control" id="selectHora2" onchange="filtrarEmpresas('hora2')">
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <p class="label">Valoración</p>
+                        <select class="form-select" aria-label="Servicios" id="selectValoracion" onchange="filtrarEmpresas('valoracion')">
+                            <option value="0" selected>Cualquier valoración</option>
+                            <option value="1">5 estrellas</option>
+                            <option value="2">4 estrellas</option>
+                            <option value="3">3 estrellas</option>
+                            <option value="4">2 estrellas</option>
+                            <option value="5">1 estrella</option>
+                        </select>
                     </div>
                 </div>
-            </mat-card-header>
-            <img mat-card-image src="">
-            <mat-card-content>
-                <p>Teléfono:{{empresa.telefono}}</p>
-                <p>Email:{{empresa.emailAdmin}}</p>
-            </mat-card-content>
-            <mat-card-actions>
-                <button mat-flat-button color="primary">Ver empresa</button>
-            </mat-card-actions>
-        </mat-card>
+                
+
+            </div>
+            <div class="tarjeta container" *ngFor="let empresa of empresas; let i = index;">
+                <div class="header" *ngIf="empresas.length != 0">
+                    {{personalizarEmpresas(i)}}
+                    <!--<div class="col-1" *ngIf="empresa.logo != ''"><img src="{{empresa.logo}}" class="circular"></div>
+                    <div class="col-1" *ngIf="empresa.logo == ''"><img src="../../../assets/images/sin-foto.jpg" class="circular"></div>
+                    <div class="col-11">
+                        <div>{{empresa.nombre}}</div>
+                        <div>{{empresa.descripcion}}</div>
+                        <div style="visibility: hidden;">
+                            {{personalizarEmpresas(i)}}
+                        </div>
+                    </div>-->
+                    <div [attr.id]="'carrusel' + i" class="carousel slide" data-bs-ride="carousel">            
+                        <div class="carousel-indicators">
+                          <button type="button" [attr.data-bs-target]="'#carrusel' + i" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                          <button type="button" [attr.data-bs-target]="'#carrusel' + i" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                          <button type="button" [attr.data-bs-target]="'#carrusel' + i" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                        </div>
+                        <div class="carousel-inner">
+                          <div class="carousel-item active" data-bs-interval="10000">
+                            <img src="{{empresa.img1}}" class="d-block w-100">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>{{empresa.nombre}}</h5>
+                            </div>
+                          </div>
+                          <div class="carousel-item" data-bs-interval="2000">
+                            <img src="{{empresa.img2}}" class="d-block w-100">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>{{empresa.nombre}}</h5>
+                            </div>
+                          </div>
+                          <div class="carousel-item">
+                            <img src="{{empresa.img3}}" class="d-block w-100">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>{{empresa.nombre}}</h5>
+                            </div>
+                          </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" [attr.data-bs-target]="'#carrusel' + i" data-bs-slide="prev">
+                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                          <span class="visually-hidden">Anterior</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" [attr.data-bs-target]="'#carrusel' + i" data-bs-slide="next">
+                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                          <span class="visually-hidden">Siguiente</span>
+                        </button>
+                    </div>
+
+                    <div class="row" style="margin-bottom: 20px;">
+                        <div class="col-12">
+                            <div class="bordesito borde{{i}} row" style="margin: 20px 0 20px 0;">
+                                <p class="titulo empresa{{i}}">Citas disponibles</p>
+                                <div class=" col-5" *ngFor="let cita of citas; let j = index" >
+                                    <div class="row citaDisponible" *ngIf="cita.empresa == empresa._id">
+                                        <div class="col-6">
+                                            <mat-icon>local_play</mat-icon> {{cita.servicio}}
+                                        </div>
+                                        <div class="col-6">
+                                            <mat-icon>assignment_ind</mat-icon> {{cita.empleado}}
+                                        </div>
+                                        <div class="col-6">
+                                            <mat-icon>alarm</mat-icon> {{formatearFecha(cita.fecha_desde)}}
+                                        </div>
+                                        <div class="col-6">
+                                            <mat-icon>alarm_off</mat-icon> {{formatearFecha(cita.fecha_hasta)}}
+                                        </div>
+                                        <button class="btn-primario boton{{i}}" (click)="modalReservar(i, j)" data-bs-toggle="modal" data-bs-target="#modalReservar">Reservar</button>
+                                    </div>
+                                </div>                       
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                
+                    <div class="row" style="margin-bottom: 20px;">
+                        <div class="col-6">
+                            <div class="bordesito borde{{i}}">
+                                <p class="titulo empresa{{i}}">Contacto</p>
+                                <div class="padding row">
+                                    <div class="col-2" style="text-align: center;">
+                                        <mat-icon>place</mat-icon>
+                                    </div>
+                                    <div class="col-10">
+                                        {{empresa.direccion}}{{getPoblacion(i)}}{{getProvincia(i)}}
+                                    </div>
+                                    <div class="col-2" style="text-align: center;">
+                                        <mat-icon> phone</mat-icon>
+                                    </div>
+                                    <div class="col-10">
+                                        {{empresa.telefono}}
+                                    </div>
+                                    <div class="col-2" style="text-align: center;">
+                                        <mat-icon> contact_mail</mat-icon>
+                                    </div>
+                                    <div class="col-10">
+                                        {{empresa.emailAdmin}}
+                                    </div>
+                                </div>                            
+                            </div>
+                            
+                        </div>
+                        <div class="col-6">
+                            <div class="bordesito borde{{i}}">
+                                <p class="titulo empresa{{i}}">Horario</p>
+                                <div class="padding">
+                                    <div id="div{{i}}" class="row" style="text-align: center;">{{this.getHorario(i)}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="header" *ngIf="empresas.length == 0">
+                    <div class="noEmpresas"> No hay citas disponibles </div>
+                </div>
+            </div>
         </div>
+        <div class="col-md-4">
+            <div class="notificaciones">
+                <div class="bordesito">
+                    <p class="titulo">Notificaciones</p>
+                    <div class="elementos">
+                        <div><mat-icon class="margen"> comment</mat-icon> Tienes <span class="resaltar" data-bs-toggle="modal" data-bs-target="#modalResena">1 valoración</span> pendiente</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="notificaciones" style="margin-top: 20px;">
+                <div class="bordesito">
+                    <p class="titulo">Próximas citas</p>
+                    <div *ngFor="let cita of proximasCitas" class="cita" style="padding: 0 20px 0 20px;">
+                        <div class="row citaDisponible" style="margin: 20px 0 20px 0;">
+                            <div class="col-12">
+                                <mat-icon>store</mat-icon> {{cita.empresa}}
+                            </div>
+                            <div class="col-6">
+                                <mat-icon>local_play</mat-icon> {{cita.servicio}}
+                            </div>
+                            <div class="col-12">
+                                <mat-icon>alarm</mat-icon> {{formatearFecha(cita.fecha_desde)}}
+                            </div>
+                            <button type="button" class="btn-primario" data-bs-toggle="modal" data-bs-target="#modal1" (click)="setEmpresa(cita)">
+                                Ver detalle
+                              </button>
+                        </div>
+                      </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
+
+<div class="modal modal-lg" tabindex="-1" id="modalReservar" style="vertical-align: middle;">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title">Reservar cita</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        
+        <div class="modal-body row">
+            <div class="col-12" style="margin-bottom: 10px;">
+                <mat-icon>store</mat-icon> {{empresa}}
+            </div>
+            <div class="col-12" style="margin-bottom: 10px;">
+                <mat-icon> place</mat-icon> {{direccion}}
+            </div>
+            <div class="col-6" style="margin-bottom: 10px;">
+                <mat-icon>local_play</mat-icon> {{servicio}}
+            </div>
+            <div class="col-6" style="margin-bottom: 10px;">
+                <mat-icon>assignment_ind</mat-icon> {{empleado}}
+            </div>
+            <div class="col-6">
+                <mat-icon>alarm</mat-icon> {{desde}}
+            </div>
+            <div class="col-6">
+                <mat-icon>alarm_off</mat-icon> {{hasta}}
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secundario" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn-primario" (click)="reservarCita()" data-bs-dismiss="modal">Reservar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal modal-lg fade" id="modal1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title" id="exModalLabel">{{empresaModal.empresa}}</h1>
+          <button type="button" class="btn-close" name="button" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+
+
+            
+            <div class="modal-body row">
+                <div class="col-12" style="margin-bottom: 10px;">
+                    <mat-icon> place</mat-icon> {{empresaModal.direccion}}, {{getPoblacion2(empresaModal.provincia, empresaModal.poblacion)}}, {{getProvincia2(empresaModal.provincia)}}
+                </div>
+                <div class="col-6" style="margin-bottom: 10px;">
+                    <mat-icon>local_play</mat-icon> {{empresaModal.servicio}}
+                </div>
+                <div class="col-6" style="margin-bottom: 10px;">
+                    <mat-icon>assignment_ind</mat-icon> {{empresaModal.empleado}}
+                </div>
+                <div class="col-6">
+                    <mat-icon>alarm</mat-icon> {{formatearFecha(empresaModal.fecha_desde)}}
+                </div>
+                <div class="col-6">
+                    <mat-icon>alarm_off</mat-icon> {{formatearFecha(empresaModal.fecha_hasta)}}
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-primario" name="button" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal modal-lg fade" id="modalResena">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title" id="exModalLabel">{{citaResena.empresa}}</h1>
+          <button type="button" class="btn-close" name="button" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+            <div class="modal-body row">
+                <div class="col-12" style="margin-bottom: 10px;">
+                    <mat-icon> place</mat-icon> {{citaResena.direccion}}
+                </div>
+                <div class="col-6" style="margin-bottom: 10px;">
+                    <mat-icon>local_play</mat-icon> {{citaResena.servicio}}
+                </div>
+                <div class="col-6" style="margin-bottom: 10px;">
+                    <mat-icon>assignment_ind</mat-icon> {{citaResena.empleado}}
+                </div>
+                <div class="col-6">
+                    <mat-icon>alarm</mat-icon> {{formatearFecha(citaResena.fecha_desde)}}
+                </div>
+                <div class="col-6">
+                    <mat-icon>alarm_off</mat-icon> {{formatearFecha(citaResena.fecha_hasta)}}
+                </div>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="modal-body row">
+                <div class="col-12" style="text-align: center;">
+                    <h3>¿Cómo ha sido tu experiencia?</h3>
+                </div>
+                <div class="col-12" style="text-align: center;">
+                    <mat-icon class="boton" (click)="pintarEstrellas(1)">star_border</mat-icon>
+                    <mat-icon class="boton" (click)="pintarEstrellas(2)">star_border</mat-icon>
+                    <mat-icon class="boton" (click)="pintarEstrellas(3)">star_border</mat-icon>
+                    <mat-icon class="boton" (click)="pintarEstrellas(4)">star_border</mat-icon>
+                    <mat-icon class="boton" (click)="pintarEstrellas(5)">star_border</mat-icon>
+                </div>
+                <div class="col-12">
+                    <label style="margin-top: 30px;">Escribe tu reseña aquí:</label>
+                    <textarea rows="7"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-primario" name="button" data-bs-dismiss="modal">Aceptar</button>
+        </div>
+      </div>
+    </div>
+  </div>

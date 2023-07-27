@@ -1,3 +1,6 @@
-<section>
-    <full-calendar [events]="events" [options]="options"></full-calendar>
+<section style="max-width: 1400px; text-align: center; min-height: 71vh;">
+    <full-calendar *ngIf="cargado" [events]="events" [options]="options"></full-calendar>
+    <div *ngIf="!cargado" class="spinner-border text-primario" role="status">
+        <span class="visually-hidden">Cargando...</span>
+      </div>
 </section>

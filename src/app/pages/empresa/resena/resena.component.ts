@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CitaService } from 'src/app/services/cita.service';
 
 @Component({
   selector: 'app-resena',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ResenaComponent implements OnInit {
 
-  constructor() { }
+  constructor(private citaService: CitaService) { }
+
+  resenas: any = '';
 
   ngOnInit(): void {
+    
+  }
+
+  obtenerResenas() {
+    this.citaService.getResenas(JSON.parse(localStorage.getItem('usuario')!).email).subscribe(data => {
+      this.resenas = data;
+    }, error => {
+      console.log(error);
+    })
   }
 
 }
